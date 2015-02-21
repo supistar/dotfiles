@@ -1,0 +1,143 @@
+" vimperatorrc 
+" by supistar (http://twitter.com/supistar)
+
+" ----- Start Loading -----
+echo "Vimparator Loading..."
+
+" ----- Main Options -----
+set titlestring='Firefox with vimperator'
+set guioptions=m
+set gui=nonavigation
+set hlsearch
+set visualbell
+highlight Bell display:none
+
+set focuscontent
+set wildoptions=auto
+
+set complete=sl
+set! browser.urlbar.filter.javascript=false
+set! browser.urlbar.maxRichResults=20
+
+set history=1000
+set ignorecase
+
+" For migemo_hint.js
+set hintmatching=custom
+
+" Bookmarks
+bmark -title="Google Search" -tags=keyword -keyword=g http://www.google.com/search?q=%s
+set defsearch=g
+
+" ----- Color Options -----
+
+" Hint style
+highlight Hint z-index:5000; font-family:monospace; font-size:15px; color:white; background-color:blue; border-color:ButtonShadow; border-width:0px; border-style:solid; padding:0px 1px 0px 1px; position:absolute;
+highlight HintElem background-color:aqua;
+highlight HintActive background:lightblue;
+
+" ----- Key Mappings -----
+
+map <C-c> :echo 'Yank!'<CR>Y
+map j <C-e>
+map k <C-y>
+map J 5<C-e>
+map K 5<C-y>
+map <BS> H
+map m H
+map , L
+map h <C-p>
+map l <C-n>
+noremap <F4> <F3>
+map <F2> <C-p>
+map <F3> <C-n>
+map <C-h> :tabmove! -1<CR>
+map <C-l> :tabmove! +1<CR>
+map U gu
+map <C-f> /
+map <C-[> <ESC>
+map <C-A-v> :mapc<CR>:cmapc<CR>:imapc<CR>:source .vimperatorrc<CR>
+
+" For bitly
+map c :bitly<CR>
+" For ALC
+map e :alc<Space>
+" For Oxford Advanced Learner's Dictionary
+map E :oxford<Space>
+
+" Set next page recognization pattern
+set nextpattern=\bnext\b,\bmore\b,next,^次(の)?.*,\b次.*,→\b,^>$,^(>>|≫)$,>>,^(>|≫),(>|≫)$
+set previouspattern=\bprev|previous\b,prev,^前(の)?.*,\b前.*,\b←,^<$,^(<<|≪)$,<<,^(<|≪),(<|≪)$ 
+
+map . :buffer!<Space>
+
+" ----- For direct_bookmark.js -----
+map B :sbm
+
+" ----- For ime_controller.js -----
+:let g:ex_ime_mode = "inactive"
+:let g:textarea_ime_mode = "auto"
+
+" ----- For sbmcommentsviewer.js -----
+#let g:def_sbm_format = "timestamp,id,tagsAndComment"
+let g:def_sbms = "h"
+map b :viewSBMComments<CR>
+
+" ----- Key Mappings with feedSomeKeys.js -----
+"autocmd LocationChange .* :fmapc
+" iView for firefox
+"autocmd LocationChange chrome\\://iviewfx/content/iview\\.html :fmap j k s a z o t p h
+" Gmail
+"autocmd LocationChange mail\.google\.com/mail :fmap c / j k n p o u e x s r a # [ ] z ? gi gs gt gd ga gc
+
+"テキストエリア内での操作をWindowsと同様に
+"inoremap <C-a> <C-v><C-a>
+"inoremap <C-z> <C-v><C-z>
+"inoremap <C-x> <C-v><C-x>
+"inoremap <C-c> <C-v><C-c>
+"inoremap <C-v> <C-v><C-v>
+"inoremap <C-b> <C-b><C-b>
+"cnoremap <C-a> <C-v><C-a>
+"cnoremap <C-z> <C-v><C-z>
+"cnoremap <C-x> <C-v><C-x>
+"cnoremap <C-c> <C-v><C-c>
+"cnoremap <C-v> <C-v><C-v>
+"cnoremap <C-b> <C-b><C-b>
+
+
+" Show feed-button to statusbar
+javascript <<EOM
+(function () {
+var feedPanel = document.createElement('statusbarpanel');
+var feedButton = document.getElementById('feed-button');
+    feedPanel.setAttribute('id','feed-panel-clone');
+    feedPanel.appendChild(feedButton.cloneNode(true));
+    feedButton.parentNode.removeChild(feedButton);
+    document.getElementById('status-bar')
+        .insertBefore(feedPanel,document.getElementById('security-button'));
+})();
+EOM
+
+
+" ----- Plugin Options -----
+
+"asdfghjklをヒントモードで使えるように(plugin: asdfghjkl.js)
+let g:asdfghjkl_default = "true" 
+
+"はてブのみ使用 (plugin: direct_bookmark.js)
+let g:direct_sbm_use_services_by_tag = "h"
+let g:direct_sbm_use_services_by_post = "h"
+
+source! ~/_vimperatorrc.local
+
+" ----- Finish Loading -----
+
+echo "Ready for using Vimperator >w<"
+
+" vim: set ft=vimperator:
+
+" ----- thanks for... -----
+" http://blog.blueblack.net/item_249
+" http://coderepos.org/share/browser/dotfiles/vimperator/retlet-vimperatorrc
+" http://vimperator.org/trac/blog/vimperator_2_0_a2
+" http://twitter.com/hogelog/status/1095507270

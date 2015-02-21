@@ -1,0 +1,10 @@
+# list the possibilities after an ambiguous completion
+set show-all-if-ambiguous on
+
+# stop the beep
+set bell-style none
+
+"\e[A": history-search-backward
+"\e[B": history-search-forward
+"\C-n":history-search-forward
+"\C-p":history-search-backward

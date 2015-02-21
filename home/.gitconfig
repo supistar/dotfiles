@@ -1,0 +1,19 @@
+[include]
+    path = .gitconfig.local
+[credential]
+    helper = cache --timeout=3600
+[core]
+    editor = vim -c \"set fenc=utf-8\"
+    pager = less -R
+    precomposeunicode = true
+[grep]
+    lineNumber = true
+[alias]
+    graph = log --graph --date-order -C -M --pretty=format:\"<%h> %ad [%an]%d %s\" --all --date=iso
+    ignore = update-index --assume-unchanged
+    unignore = update-index --no-assume-unchanged
+    ignored = !git ls-files -v | grep "^[a-z]"
+[gitflow "feature.start"]
+    fetch = true
+[url "git@github.com:"]
+    insteadOf = https://github.com/
