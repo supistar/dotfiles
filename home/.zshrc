@@ -132,15 +132,6 @@ function ls_abbrev() {
     fi
 }
 
-# For tmux alias
-if [ $SHLVL = 1 ]; then
-#  alias tmux="tmux attach || tmux new-session \; source-file ~/.tmux.session"
-    #tmux attach || tmux -f $HOME/.tmux.conf
-    #tmux attach || tmux new
-    #alias tmux="tmux attach || tmux new"
-    alias tmux="tmux attach || tmux -f $HOME/.tmux.conf"
-fi
-
 # For autojump
 [[ -s /etc/profile.d/autojump.sh ]] && . /etc/profile.d/autojump.sh
 
