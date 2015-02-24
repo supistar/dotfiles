@@ -66,11 +66,23 @@ NeoBundle 'w0ng/vim-hybrid'
 NeoBundle 'alpaca-tc/alpaca_powertabline'
 NeoBundle 'Lokaltog/powerline', { 'rtp' : 'powerline/bindings/vim'}
 NeoBundle 'Lokaltog/powerline-fontpatcher'
+NeoBundle 'Flake8-vim'
+NeoBundle 'davidhalter/jedi-vim'
+NeoBundle 'hynek/vim-python-pep8-indent'
+NeoBundle 'Townk/vim-autoclose'
+NeoBundle 'scrooloose/syntastic'
 
 call neobundle#end()
 filetype plugin indent on
+syntax on
 
+" Powerline
 set laststatus=2
 set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
 let g:Powerline_symbols = 'compatible'
 set noshowmode
+
+" Python
+let g:PyFlakeOnWrite = 1
+let g:PyFlakeCheckers = 'pep8,mccabe,pyflakes'
+let g:PyFlakeDefaultComplexity=12
