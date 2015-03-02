@@ -226,9 +226,6 @@ export PATH=$ANDROID_SDK_ROOT/tools:$ANDROID_SDK_ROOT/platform-tools:$PATH
 export ANT_ROOT=/usr/local/bin
 export PATH=$ANT_ROOT:$PATH
 
-# Add RVM to PATH for scripting
-export PATH="$PATH:$HOME/.rvm/bin"
-
 #export JAVA_HOME=$(/usr/libexec/java_home -v 1.6)
 export JAVA_HOME=$(/usr/libexec/java_home -v 1.7)
 
@@ -252,3 +249,11 @@ compinit -u
 # For powerline
 export PATH=~/Library/Python/2.7/bin:$PATH
 source ~/Library/Python/2.7/lib/python/site-packages/powerline/bindings/zsh/powerline.zsh
+
+# Add anyenv to PATH for scripting
+export PATH="$HOME/.anyenv/bin:$PATH"
+eval "$(anyenv init -)"
+for D in `ls $HOME/.anyenv/envs`
+do
+  export PATH="$HOME/.anyenv/envs/$D/shims:$PATH" 
+done
