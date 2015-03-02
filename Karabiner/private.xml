@@ -1,0 +1,132 @@
+<?xml version="1.0"?>
+<root>
+
+    <devicevendordef>
+        <vendorname>TopreCorporation</vendorname>
+        <vendorid>0x853</vendorid>
+    </devicevendordef>
+
+    <devicevendordef>
+        <vendorname>PFU</vendorname>
+        <vendorid>0x4fe</vendorid>
+    </devicevendordef>
+
+    <deviceproductdef>
+        <productname>Realforce87</productname>
+        <productid>0x111</productid>
+    </deviceproductdef>
+
+    <deviceproductdef>
+        <productname>Realforce86</productname>
+        <productid>0x10e</productid>
+    </deviceproductdef>
+
+    <deviceproductdef>
+        <productname>HHKBProfessionalJP</productname>
+        <productid>0x00d</productid>
+    </deviceproductdef>
+
+    <list>
+        <item>
+            <name>LeaveInsMode with EISUU (Terminal)</name>
+            <identifier>private.app_terminal_esc_with_eisuu</identifier>
+            <only>TERMINAL</only>
+            <autogen>--KeyToKey-- KeyCode::ESCAPE, KeyCode::ESCAPE, KeyCode::JIS_EISUU</autogen>
+            <autogen>--KeyToKey-- KeyCode::C, VK_CONTROL, KeyCode::C, VK_CONTROL, KeyCode::JIS_EISUU</autogen>
+        </item>
+    </list>
+
+    <item>
+        <name>Topre Realforce</name>
+        <item>
+            <name>Swap Options and Commands</name>
+            <identifier>private.deviceproductdef.topre.swap_option_and_command</identifier>
+            <device_only>DeviceVendor::TopreCorporation</device_only>
+            <autogen>--KeyToKey-- KeyCode::OPTION_L, KeyCode::COMMAND_L</autogen>
+            <autogen>--KeyToKey-- KeyCode::COMMAND_L, KeyCode::OPTION_L</autogen>
+            <autogen>--KeyToKey-- KeyCode::OPTION_R, KeyCode::COMMAND_R</autogen>
+            <autogen>--KeyToKey-- KeyCode::COMMAND_R, KeyCode::OPTION_R</autogen>
+        </item>
+
+        <item>
+            <name>Swap Options and Commands (+ When you type Commands only, send Eisu/Kana)</name>
+            <identifier>private.deviceproductdef.topre.swap_option_and_command_with_eisu_kana</identifier>
+            <device_only>DeviceVendor::TopreCorporation</device_only>
+            <autogen>--KeyOverlaidModifier-- KeyCode::OPTION_L, KeyCode::COMMAND_L, KeyCode::JIS_EISUU</autogen>
+            <autogen>--KeyOverlaidModifier-- KeyCode::OPTION_R, KeyCode::COMMAND_R, KeyCode::JIS_KANA</autogen>
+            <autogen>--KeyToKey-- KeyCode::COMMAND_L, KeyCode::OPTION_L</autogen>
+            <autogen>--KeyToKey-- KeyCode::COMMAND_R, KeyCode::OPTION_R</autogen>
+        </item>
+
+        <item>
+            <name>Apply Volume Controls (87)</name>
+            <identifier>private.deviceproductdef.topre.apply_volume_controls_realforce87</identifier>
+            <device_only>DeviceVendor::TopreCorporation, DeviceProduct::Realforce87</device_only>
+            <autogen>--KeyToConsumer-- KeyCode::F13, ConsumerKeyCode::VOLUME_MUTE</autogen>
+            <autogen>--KeyToConsumer-- KeyCode::PC_KEYPAD_NUMLOCK, ConsumerKeyCode::VOLUME_DOWN</autogen>
+            <autogen>--KeyToConsumer-- KeyCode::PC_PAUSE, ConsumerKeyCode::VOLUME_UP</autogen>
+        </item>
+
+        <item>
+            <name>Apply Volume Controls (86)</name>
+            <identifier>private.deviceproductdef.topre.apply_volume_controls_realforce86</identifier>
+            <device_only>DeviceVendor::TopreCorporation, DeviceProduct::Realforce86</device_only>
+            <autogen>--KeyToConsumer-- KeyCode::F13, ConsumerKeyCode::VOLUME_MUTE</autogen>
+            <autogen>--KeyToConsumer-- KeyCode::PC_SCROLLLOCK, ConsumerKeyCode::VOLUME_DOWN</autogen>
+            <autogen>--KeyToConsumer-- KeyCode::PC_PAUSE, ConsumerKeyCode::VOLUME_UP</autogen>
+        </item>
+
+        <item>
+            <name>App to Option (86)</name>
+            <identifier>private.deviceproductdef.topre.app_to_option_realforce86</identifier>
+            <device_only>DeviceVendor::TopreCorporation, DeviceProduct::Realforce86</device_only>
+            <autogen>--KeyToKey-- KeyCode::PC_APPLICATION, KeyCode::OPTION_R</autogen>
+        </item>
+
+        <item>
+            <name>Home/End</name>
+            <identifier>private.deviceproductdef.topre.home_end</identifier>
+            <device_only>DeviceVendor::TopreCorporation</device_only>
+            <autogen>--KeyToKey-- KeyCode::HOME, KeyCode::CURSOR_LEFT, VK_COMMAND</autogen>
+            <autogen>--KeyToKey-- KeyCode::END, KeyCode::CURSOR_RIGHT, VK_COMMAND</autogen>
+        </item>
+    </item>
+
+    <item>
+        <name>HHKB Professional JP</name>
+
+        <item>
+            <name>Swap L_Options and L_Commands</name>
+            <identifier>private.deviceproductdef.pfu.hhkb.professional.jp.swap_left_option_and_left_command</identifier>
+            <device_only>DeviceVendor::PFU, DeviceProduct::HHKBProfessionalJP</device_only>
+            <autogen>--KeyToKey-- KeyCode::COMMAND_L, KeyCode::OPTION_L</autogen>
+            <autogen>--KeyToKey-- KeyCode::OPTION_L, KeyCode::COMMAND_L</autogen>
+        </item>
+
+        <item>
+            <name>Swap R_Options and R_Commands</name>
+            <identifier>private.deviceproductdef.pfu.hhkb.professional.jp.swap_right_option_and_right_command</identifier>
+            <device_only>DeviceVendor::PFU, DeviceProduct::HHKBProfessionalJP</device_only>
+            <autogen>--KeyToKey-- KeyCode::COMMAND_R, KeyCode::OPTION_R</autogen>
+            <autogen>--KeyToKey-- KeyCode::OPTION_R, KeyCode::COMMAND_R</autogen>
+        </item>
+
+        <item>
+            <name>Swap L_Options and JIS_EISUU</name>
+            <identifier>private.deviceproductdef.pfu.hhkb.professional.jp.swap_left_option_and_eisuu</identifier>
+            <device_only>DeviceVendor::PFU, DeviceProduct::HHKBProfessionalJP</device_only>
+            <autogen>--KeyToKey-- KeyCode::JIS_EISUU, KeyCode::OPTION_L</autogen>
+            <autogen>--KeyToKey-- KeyCode::OPTION_L, KeyCode::JIS_EISUU</autogen>
+        </item>
+
+        <item>
+            <name>Swap JIS_KANA, R_Command and R_Options (From right, R_Options -> JIS_KANA -> R_Command)</name>
+            <identifier>private.deviceproductdef.pfu.hhkb.professional.jp.swap_kana_and_right_command_and_right_option</identifier>
+            <device_only>DeviceVendor::PFU, DeviceProduct::HHKBProfessionalJP</device_only>
+            <autogen>--KeyToKey-- KeyCode::JIS_KANA, KeyCode::OPTION_R</autogen>
+            <autogen>--KeyToKey-- KeyCode::COMMAND_R, KeyCode::JIS_KANA</autogen>
+            <autogen>--KeyToKey-- KeyCode::OPTION_R, KeyCode::COMMAND_R</autogen>
+        </item>
+
+    </item>
+</root>
