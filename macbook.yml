@@ -4,6 +4,8 @@
   gather_facts: no
   sudo: no
   vars:
+    homebrew_packages_taps:
+      - caskroom/versions
     homebrew_packages_packages:
       - { name: android-sdk }
       - { name: android-ndk }
