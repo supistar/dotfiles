@@ -1,0 +1,28 @@
+{
+  "default_module": "powerline.segments.common",
+  "segment_data": {
+    "battery": {
+      "before": "🔋 "
+    }
+  },
+  "segments": {
+    "right": [{
+      "function": "powerline.segments.common.vcs.branch"
+    }, {
+      "function": "powerline.segments.common.bat.battery",
+      "name": "battery"
+    }, {
+      "function": "powerline.segments.common.sys.system_load",
+      "priority": 50
+    }, {
+      "function": "powerline.segments.common.wthr.weather"
+    }, {
+      "function": "powerline.segments.common.time.date",
+      "name": "time",
+      "args": {
+        "format": "%Y/%m/%d (%a) %H:%M",
+        "istime": true
+      }
+    }]
+  }
+}
