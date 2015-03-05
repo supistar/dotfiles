@@ -154,7 +154,7 @@
     - name: 'Karabiner: Make symlink of setting files'
       file: src={{ item }} dest=~/Library/Application\ Support/Karabiner/{{ item | basename }} state=link force=yes
       with_fileglob:
-        - Karabiner/*
+        - applications/Karabiner/*
 
     - name: mkdir vim backup dir
       file: path=~/.vim-backup state=directory
