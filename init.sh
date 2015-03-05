@@ -31,6 +31,10 @@ sh ./scripts/set-anyenv-path.sh bash_profile
 # Install anyenv
 sh ./scripts/install-anyenv.sh
 
+# Tap versions (homebrew and caskroom)
+brew tap homebrew/versions
+brew tap caskroom/versions
+
 # Execute ansible
 ansible-playbook macbook.yml -i hosts
 
