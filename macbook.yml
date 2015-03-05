@@ -1,0 +1,149 @@
+---
+- hosts: localhost
+  connection: local
+  gather_facts: no
+  sudo: no
+  vars:
+
+    homebrew_packages_packages:
+      - { name: android-sdk }
+      - { name: android-ndk }
+      - { name: ant }
+      - { name: apktool }
+      - { name: appledoc22 }
+      - { name: autoconf }
+      - { name: automake }
+      - { name: cmake }
+      - { name: ctags }
+      - { name: curl }
+      - { name: doxygen }
+      - { name: expat }
+      - { name: faac }
+      - { name: ffmpeg }
+      - { name: fswatch }
+      - { name: git }
+      - { name: git-flow }
+      - { name: gnupg }
+      - { name: go }
+      - { name: gradle }
+      - { name: highlight }
+      - { name: httpie }
+      - { name: hub }
+      - { name: icu4c }
+      - { name: imagemagick }
+      - { name: ino }
+      - { name: ios-sim }
+      - { name: jq }
+      - { name: jsdoc-toolkit }
+      - { name: lame }
+      - { name: libpng }
+      - { name: libtool }
+      - { name: libusb }
+      - { name: libusb-compat }
+      - { name: libxml2 }
+      - { name: libyaml }
+      - { name: maven }
+      - { name: nkf }
+      - { name: phantomjs }
+      - { name: pkg-config }
+      - { name: reattach-to-user-namespace }
+      - { name: redis }
+      - { name: source-highlight }
+      - { name: sqlite }
+      - { name: tig }
+      - { name: tmux }
+      - { name: tree }
+      - { name: vim, install_options: with-lua }
+      - { name: watch }
+      - { name: wget }
+      - { name: wine }
+      - { name: winetricks }
+      - { name: x264 }
+      - { name: xctool }
+      - { name: xvid }
+      - { name: yasm }
+      - { name: yuicompressor }
+      - { name: z }
+      - { name: zsh }
+      - { name: zsh-completions }
+
+    homebrew_cask_packages_packages:
+      - xquartz
+      - adobe-air
+      - adobe-creative-cloud
+      - alfred
+      - android-studio
+      - appcode
+      - arduino
+      - burn
+      - chromecast
+      - chromium
+      - cooviewer
+      - dropbox
+      - eclipse-ide
+      - eye-fi
+      - firefox
+      - genymotion
+      - google-chrome
+      - handbrake
+      - hipchat
+      - inkscape
+      - iterm2
+      - java
+      - java6
+      - java7
+      - karabiner
+      - kobito
+      - lastfm
+      - limechat
+      - macvim
+      - mono-mdk
+      - skitch
+      - skype
+      - slack
+      - sublime-text
+      - unity
+      - vagrant
+      - virtualbox
+      - vlc
+      - vmware-fusion
+      - webstorm
+      - xamarin-studio
+
+  pre_tasks:
+    - name: 'gem: install bundler'
+      gem: name=bundler executable=~/.anyenv/envs/rbenv/shims/gem user_install=False
+    - name: 'gem: install homesick'
+      gem: name=homesick executable=~/.anyenv/envs/rbenv/shims/gem user_install=False
+    - name: 'pip: install powerline'
+      command: ~/.anyenv/envs/pyenv/shims/pip2.7 install --user powerline-status
+
+  tasks:
+    - name: 'Clone dotfiles under home dir'
+      command: homesick clone supistar/dotfiles
+
+    - name: 'Make symlinks to under home dir'
+      command: homesick symlink dotfiles --force
+
+    - name: mkdir Karabiner dir
+      file: path=~/Library/Application\ Support/Karabiner state=directory
+
+    - name: 'Karabiner: Make symlink of setting files'
+      file: src={{ item }} dest=~/Library/Application\ Support/Karabiner/{{ item | basename }} state=link force=yes
+      with_fileglob:
+        - Karabiner/*
+
+    - name: mkdir vim backup dir
+      file: path=~/.vim-backup state=directory
+
+    - name: mkdir vim-neobundle dir
+      file: path=~/.vim/bundle state=directory
+      notify: install neobundle
+
+  handlers:
+    - name: install neobundle
+      command: git clone git://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
+
+  roles:
+    - hnakamur.homebrew-cask-packages
+    - hnakamur.homebrew-packages
