@@ -6,16 +6,15 @@
   vars:
     homebrew_packages_taps:
       - caskroom/versions
+
     homebrew_packages_packages:
       - { name: android-sdk }
       - { name: android-ndk }
       - { name: ant }
       - { name: apktool }
-      - { name: apple-gcc42 }
-      - { name: appledoc }
+      - { name: appledoc22 }
       - { name: autoconf }
       - { name: automake }
-      - { name: brew-cask }
       - { name: cmake }
       - { name: ctags }
       - { name: curl }
@@ -39,7 +38,6 @@
       - { name: jq }
       - { name: jsdoc-toolkit }
       - { name: lame }
-      - { name: libiconv }
       - { name: libpng }
       - { name: libtool }
       - { name: libusb }
@@ -72,6 +70,7 @@
       - { name: zsh-completions }
 
     homebrew_cask_packages_packages:
+      - xquartz
       - adobe-air
       - adobe-creative-cloud
       - alfred
@@ -115,30 +114,38 @@
 
   pre_tasks:
     - name: 'gem: install bundler'
-      gem: name=bundler executable=${HOME}/.anyenv/envs/rbenv/shims/gem user_install=False
+      gem: name=bundler executable=~/.anyenv/envs/rbenv/shims/gem user_install=False
     - name: 'gem: install homesick'
-      gem: name=homesick executable=${HOME}/.anyenv/envs/rbenv/shims/gem user_install=False
+      gem: name=homesick executable=~/.anyenv/envs/rbenv/shims/gem user_install=False
+    - name: 'pip: install powerline'
+      command: ~/.anyenv/envs/pyenv/shims/pip2.7 install --user powerline-status
 
   tasks:
+    - name: 'Clone dotfiles under home dir'
+      command: homesick clone supistar/dotfiles
+
     - name: 'Make symlinks to under home dir'
-      command: homesick clone supistar/dotfiles && homesick symlink dotfiles
+      command: homesick symlink dotfiles --force
+
+    - name: mkdir Karabiner dir
+      file: path=~/Library/Application\ Support/Karabiner state=directory
 
     - name: 'Karabiner: Make symlink of setting files'
-      file: src={{ item }} dest=${HOME}/Library/Application\ Support/Karabiner/{{ item | basename }} state=link force=yes
+      file: src={{ item }} dest=~/Library/Application\ Support/Karabiner/{{ item | basename }} state=link force=yes
       with_fileglob:
         - Karabiner/*
 
     - name: mkdir vim backup dir
-      file: path=${HOME}/.vim-backup state=directory
+      file: path=~/.vim-backup state=directory
 
     - name: mkdir vim-neobundle dir
-      file: path=${HOME}/.vim/bundle state=directory
+      file: path=~/.vim/bundle state=directory
       notify: install neobundle
 
   handlers:
     - name: install neobundle
-      command: git clone git://github.com/Shougo/neobundle.vim ${HOME}/.vim/bundle/neobundle.vim
+      command: git clone git://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
 
   roles:
-    - hnakamur.homebrew-packages
     - hnakamur.homebrew-cask-packages
+    - hnakamur.homebrew-packages
