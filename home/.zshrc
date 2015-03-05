@@ -32,9 +32,9 @@ alias l='ls -CFG'
 alias rm='rmtrash'
 
 # Settings of MacVim / "vi" and "vim" mapping to MacVim
-export EDITOR=/Applications/MacVim.app/Contents/MacOS/Vim
-alias vi='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim "$@"'
-alias vim='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim "$@"'
+export EDITOR=${HOME}/Applications/MacVim.app/Contents/MacOS/Vim
+alias vi='env LANG=ja_JP.UTF-8 ${HOME}/Applications/MacVim.app/Contents/MacOS/Vim "$@"'
+alias vim='env LANG=ja_JP.UTF-8 ${HOME}/Applications/MacVim.app/Contents/MacOS/Vim "$@"'
 
 # For vless
 alias vless='/usr/share/vim/vim73/macros/less.sh'
@@ -197,17 +197,11 @@ export ANDROID_HOME=/usr/local/opt/android-sdk
 # For tmux scripts
 export PATH=$HOME/.tmux/scripts:$PATH
 
-# For coffee
-export PATH=$PATH:/usr/local/share/npm/bin
-
 # For Qt
 export PATH=$PATH:/Applications/Qt5.1.1/5.1.1/clang_64/bin
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
-
-# For NVM
-source ~/.nvm/nvm.sh
 
 # Add environment variable COCOS_CONSOLE_ROOT for cocos2d-x
 export COCOS_CONSOLE_ROOT=/usr/local/share/cocos2d-x-3.0/tools/cocos2d-console/bin
@@ -235,9 +229,7 @@ export MAVEN_OPTS='-Xmx1024m -XX:MaxPermSize=256m'
 export GOPATH=$HOME/.go
 eval "$(direnv hook zsh)"
 
-# Git-flow completion
-source ~/workspace-git/git-flow-completion/git-flow-completion.zsh
-
+# zsh completion
 if [ -e /usr/local/share/zsh-completions ]; then
     fpath=(/usr/local/share/zsh-completions $fpath)
 fi
@@ -247,8 +239,8 @@ autoload -Uz compinit
 compinit -u
 
 # For powerline
-export PATH=~/Library/Python/2.7/bin:$PATH
-source ~/Library/Python/2.7/lib/python/site-packages/powerline/bindings/zsh/powerline.zsh
+export PATH=$HOME/.local/bin:$PATH
+source $HOME/.local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh
 
 # Add anyenv to PATH for scripting
 export PATH="$HOME/.anyenv/bin:$PATH"
