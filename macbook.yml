@@ -5,6 +5,9 @@
   sudo: no
   vars:
 
+    homebrew_packages_taps:
+      - sanemat/font
+
     homebrew_packages_packages:
       - { name: android-sdk }
       - { name: android-ndk }
@@ -46,8 +49,11 @@
       - { name: nkf }
       - { name: phantomjs }
       - { name: pkg-config }
+      - { name: psutils }
       - { name: reattach-to-user-namespace }
       - { name: redis }
+      - { name: ricty, install_options: powerline, vim-powerline }
+      - { name: rmtrash }
       - { name: source-highlight }
       - { name: sqlite }
       - { name: tig }
@@ -117,6 +123,8 @@
       gem: name=homesick executable=~/.anyenv/envs/rbenv/shims/gem user_install=False
     - name: 'pip: install powerline'
       command: ~/.anyenv/envs/pyenv/shims/pip2.7 install --user powerline-status
+    - name: 'pip: install psutil'
+      command: ~/.anyenv/envs/pyenv/shims/pip2.7 install --user psutil
 
   tasks:
     - name: 'Clone dotfiles under home dir'
@@ -124,6 +132,21 @@
 
     - name: 'Make symlinks to under home dir'
       command: homesick symlink dotfiles --force
+
+    - name: 'Copy Ricty fonts'
+      shell: cp -f /usr/local/opt/ricty/share/fonts/Ricty*.ttf ~/Library/Fonts/
+
+    - name: 'Clone powerline fonts'
+      command: git clone git@github.com:powerline/fonts.git /tmp/fonts
+
+    - name: 'Install powerline fonts'
+      command: sh /tmp/fonts/install.sh
+
+    - name: 'Refresh fonts cache'
+      command: fc-cache -vf
+
+    - name: 'Delete temporary directory for powerline fonts'
+      file: path=/tmp/fonts state=absent
 
     - name: mkdir Karabiner dir
       file: path=~/Library/Application\ Support/Karabiner state=directory
