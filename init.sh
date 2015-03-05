@@ -5,6 +5,8 @@ expect -c "
 spawn sudo xcodebuild -license
 expect \"Password\"
 send -- \"YOUR_PASSWORD\n\"
+expect \"You have not agreed to the Xcode license agreements\"
+send -- \"\n\"
 expect \"MAC SDK AND XCODE AGREEMENT\"
 send -- \"G\"
 expect \"By typing 'agree'\"
@@ -24,10 +26,10 @@ brew install ansible
 ansible-galaxy install hnakamur.homebrew-packages
 ansible-galaxy install hnakamur.homebrew-cask-packages
 
-# Install anyenv
-sh ./scripts/install-anyenv.sh
 # Set anyenv path
 sh ./scripts/set-anyenv-path.sh bash_profile
+# Install anyenv
+sh ./scripts/install-anyenv.sh
 
 # Execute ansible
 ansible-playbook macbook.yml -i hosts
