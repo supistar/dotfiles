@@ -49,9 +49,11 @@
       - { name: nkf }
       - { name: phantomjs }
       - { name: pkg-config }
+      - { name: psutils }
       - { name: reattach-to-user-namespace }
       - { name: redis }
       - { name: ricty, install_options: powerline, vim-powerline }
+      - { name: rmtrash }
       - { name: source-highlight }
       - { name: sqlite }
       - { name: tig }
