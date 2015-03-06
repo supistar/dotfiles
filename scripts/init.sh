@@ -1,17 +1,7 @@
 #!/bin/sh
 
 # Agree Xcode llcense
-expect -c "
-spawn sudo xcodebuild -license
-expect \"Password\"
-send -- \"YOUR_PASSWORD\n\"
-expect \"You have not agreed to the Xcode license agreements\"
-send -- \"\n\"
-expect \"MAC SDK AND XCODE AGREEMENT\"
-send -- \"G\"
-expect \"By typing 'agree'\"
-send -- \"agree\n\"
-"
+sudo xcodebuild -license
 
 # Install homebrew
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
