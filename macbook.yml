@@ -108,7 +108,7 @@
       - skype
       - slack
       - sublime-text
-      - unity
+      - unity463p2
       - vagrant
       - virtualbox
       - vlc
@@ -125,6 +125,15 @@
       command: ~/.anyenv/envs/pyenv/shims/pip2.7 install --user powerline-status
     - name: 'pip: install psutil'
       command: ~/.anyenv/envs/pyenv/shims/pip2.7 install --user psutil
+
+    - name: 'homebrew: tap homebrew/versions'
+      command: brew tap homebrew/versions
+
+    - name: 'homebrew: tap caskroom/versions'
+      command: brew tap caskroom/versions
+
+    - name: 'homebrew: tap supistar/versions'
+      command: brew tap supistar/versions
 
   tasks:
     - name: 'Clone dotfiles under home dir'
