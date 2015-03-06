@@ -1,5 +1,9 @@
 #!/bin/sh
 
+RB_VER=2.2.0
+ND_VER=v0.10.36
+PY_VER=2.7.9
+
 # Clone anyenv
 git clone https://github.com/riywo/anyenv ~/.anyenv
 
@@ -8,19 +12,28 @@ export PATH="$HOME/.anyenv/bin:$PATH"
 
 # Install
 eval "$(anyenv init -)"
-#mkdir ${HOME}/.anyenv/envs
-anyenv install -f rbenv
-anyenv install -f pyenv
-anyenv install -f ndenv
 
-rbenv install 2.2.0
-ndenv install v0.10.36
-pyenv install 2.7.9
+IS_INSTALLED_RB=$(rbenv version | grep ${RB_VER} | wc -l | xargs echo)
+if [ ${IS_INSTALLED_RB} -eq 0 ]; then
+    anyenv install -f rbenv
+    rbenv install -f ${RB_VER}
+    rbenv global ${RB_VER}
+    rbenv rehash
+fi
 
-rbenv global 2.2.0
-ndenv global v0.10.36
-pyenv global 2.7.9
+IS_INSTALLED_ND=$(ndenv version | grep ${ND_VER} | wc -l | xargs echo)
+if [ ${IS_INSTALLED_ND} -eq 0 ]; then
+    anyenv install -f ndenv
+    ndenv install -f ${ND_VER}
+    ndenv global ${ND_VER}
+    ndenv rehash
+fi
 
-# Reload
-exec $SHELL -l
+IS_INSTALLED_PY=$(pyenv version | grep ${PY_VER} | wc -l | xargs echo)
+if [ ${IS_INSTALLED_PY} -eq 0 ]; then
+    anyenv install -f pyenv
+    pyenv install -f ${PY_VER}
+    pyenv global ${PY_VER}
+    pyenv rehash
+fi
 
