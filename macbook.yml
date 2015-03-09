@@ -29,6 +29,7 @@
       - { name: gnupg }
       - { name: go }
       - { name: gradle }
+      - { name: heroku-toolbelt }
       - { name: highlight }
       - { name: httpie }
       - { name: hub }
