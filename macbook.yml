@@ -166,11 +166,14 @@
         - ~/.homesick/repos/dotfiles/applications/Karabiner/*
 
     - name: mkdir vim backup dir
-      file: path=~/.vim-backup state=directory
+      file: path=~/.vim/backup state=directory
 
     - name: mkdir vim-neobundle dir
       file: path=~/.vim/bundle state=directory
       notify: install neobundle
+
+    - name: mkdir vim undo dir
+      file: path=~/.vim/undo state=directory
 
   handlers:
     - name: install neobundle
