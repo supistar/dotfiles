@@ -139,6 +139,9 @@
     - name: 'Clone dotfiles under home dir'
       command: homesick clone supistar/dotfiles
 
+    - name: 'Pull homesick dotfiles'
+      command: homesick pull dotfiles
+
     - name: 'Make symlinks to under home dir'
       command: homesick symlink dotfiles --force
 
