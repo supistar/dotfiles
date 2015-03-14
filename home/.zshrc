@@ -60,35 +60,11 @@ export LSCOLORS=gxfxcxdxbxegedabagacad
 # Update right space prompt
 # - Show current directory
 # - Show github branch
-#autoload -Uz add-zsh-hook
-#autoload -Uz vcs_info
 autoload -Uz colors
 colors
 RESET="%{${reset_color}%}"
 MAGENTA="%{${fg[magenta]}%}"
 GREEN="%{${fg[green]}%}"
-
-#update_prompt () {
-#    local prompt="${RESET}[${MAGENTA}%~${RESET}]"
-#
-#    LANG=C vcs_info
-#    if [ -z "$vcs_info_msg_0_" ];then
-#        RPROMPT=$prompt
-#        return 0
-#    fi
-#
-#    prompt+="${GREEN}$vcs_info_msg_0_${RESET}"
-#    if [ -n "$vcs_info_msg_2_" ]; then
-#        prompt+="[($vcs_info_msg_2_)]"
-#    fi
-#    RPROMPT=$prompt
-#}
-#
-#add-zsh-hook precmd update_prompt
-#git_branch() {
-#    RPROMPT="${RESET}[${MAGENTA}%~${RESET}][${GREEN}$(git branch 2>&1 | awk '/^\*/ {printf "(%s)",$2}')${RESET}]"
-#}
-#add-zsh-hook chpwd git_branch
 
 # For show files
 chpwd() {
@@ -184,7 +160,6 @@ function do_enter() {
 zle -N do_enter
 bindkey '^m' do_enter
 
-
 # For Japanese
 export LC_CTYPE="ja_JP.UTF-8"
 
@@ -199,9 +174,6 @@ export PATH=$HOME/.tmux/scripts:$PATH
 
 # For Qt
 export PATH=$PATH:/Applications/Qt5.1.1/5.1.1/clang_64/bin
-
-### Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:$PATH"
 
 # Add environment variable COCOS_CONSOLE_ROOT for cocos2d-x
 export COCOS_CONSOLE_ROOT=/usr/local/share/cocos2d-x-3.0/tools/cocos2d-console/bin
@@ -220,9 +192,8 @@ export PATH=$ANDROID_SDK_ROOT/tools:$ANDROID_SDK_ROOT/platform-tools:$PATH
 export ANT_ROOT=/usr/local/bin
 export PATH=$ANT_ROOT:$PATH
 
-#export JAVA_HOME=$(/usr/libexec/java_home -v 1.6)
+# For Java development
 export JAVA_HOME=$(/usr/libexec/java_home -v 1.7)
-
 export MAVEN_OPTS='-Xmx1024m -XX:MaxPermSize=256m'
 
 # zsh completion
