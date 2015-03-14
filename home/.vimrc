@@ -78,6 +78,7 @@ augroup END
 highlight CursorLine ctermbg=black guibg=black
 
 nmap <ESC><ESC> :nohlsearch<CR><ESC>
+inoremap <silent> jj <ESC>
 
 " Powerline
 set laststatus=2
