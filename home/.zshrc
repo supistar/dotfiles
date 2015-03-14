@@ -225,10 +225,6 @@ export JAVA_HOME=$(/usr/libexec/java_home -v 1.7)
 
 export MAVEN_OPTS='-Xmx1024m -XX:MaxPermSize=256m'
 
-# For direnv (go)
-export GOPATH=$HOME/.go
-eval "$(direnv hook zsh)"
-
 # zsh completion
 if [ -e /usr/local/share/zsh-completions ]; then
     fpath=(/usr/local/share/zsh-completions $fpath)
