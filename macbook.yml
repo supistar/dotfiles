@@ -94,6 +94,7 @@
       - handbrake
       - hipchat
       - inkscape
+      - intellij-idea-ce
       - iterm2
       - java
       - java6
@@ -104,9 +105,11 @@
       - limechat
       - macvim-kaoriya
       - mono-mdk
+      - playonmac
       - skitch
       - skype
       - slack
+      - splashtop-personal
       - sublime-text
       - unity463p2
       - vagrant
