@@ -22,7 +22,7 @@
       - { name: doxygen }
       - { name: expat }
       - { name: faac }
-      - { name: ffmpeg }
+      - { name: ffmpeg, install_options: with-faac }
       - { name: fswatch }
       - { name: git }
       - { name: git-flow }
