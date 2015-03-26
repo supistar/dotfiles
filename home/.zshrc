@@ -216,3 +216,8 @@ for D in `ls $HOME/.anyenv/envs`
 do
   export PATH="$HOME/.anyenv/envs/$D/shims:$PATH" 
 done
+
+# For credentials
+if [ -e $HOME/.credentials ]; then
+    source $HOME/.credentials
+fi
