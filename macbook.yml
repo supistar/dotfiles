@@ -131,56 +131,41 @@
       command: ~/.anyenv/envs/pyenv/shims/pip2.7 install --user powerline-status
     - name: 'pip: install psutil'
       command: ~/.anyenv/envs/pyenv/shims/pip2.7 install --user psutil
-
     - name: 'homebrew: tap homebrew/versions'
       command: brew tap homebrew/versions
-
     - name: 'homebrew: tap caskroom/versions'
       command: brew tap caskroom/versions
-
     - name: 'homebrew: tap supistar/versions'
       command: brew tap supistar/versions
 
   tasks:
     - name: 'Clone dotfiles under home dir'
       command: homesick clone supistar/dotfiles
-
     - name: 'Pull homesick dotfiles'
       command: homesick pull dotfiles
-
     - name: 'Make symlinks to under home dir'
       command: homesick symlink dotfiles --force
-
     - name: 'Copy Ricty fonts'
       shell: cp -f /usr/local/opt/ricty/share/fonts/Ricty*.ttf ~/Library/Fonts/
-
     - name: 'Clone powerline fonts'
       command: git clone git@github.com:powerline/fonts.git /tmp/fonts
-
     - name: 'Install powerline fonts'
       command: sh /tmp/fonts/install.sh
-
     - name: 'Refresh fonts cache'
       command: fc-cache -vf
-
     - name: 'Delete temporary directory for powerline fonts'
       file: path=/tmp/fonts state=absent
-
     - name: mkdir Karabiner dir
       file: path=~/Library/Application\ Support/Karabiner state=directory
-
     - name: 'Karabiner: Make symlink of setting files'
       file: src={{ item }} dest=~/Library/Application\ Support/Karabiner/{{ item | basename }} state=link force=yes
       with_fileglob:
         - ~/.homesick/repos/dotfiles/applications/Karabiner/*
-
     - name: mkdir vim backup dir
       file: path=~/.vim/backup state=directory
-
     - name: mkdir vim-neobundle dir
       file: path=~/.vim/bundle state=directory
       notify: install neobundle
-
     - name: mkdir vim undo dir
       file: path=~/.vim/undo state=directory
 
