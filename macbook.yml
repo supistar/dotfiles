@@ -89,6 +89,8 @@
       - eclipse-ide
       - eye-fi
       - firefox
+      - font-m-plus
+      - font-terminus
       - genymotion
       - google-chrome
       - handbrake
@@ -135,6 +137,8 @@
       command: brew tap homebrew/versions
     - name: 'homebrew: tap caskroom/versions'
       command: brew tap caskroom/versions
+    - name: 'homebrew: tap caskroom/homebrew-fonts'
+      command: brew tap caskroom/homebrew-fonts
     - name: 'homebrew: tap supistar/versions'
       command: brew tap supistar/versions
 
