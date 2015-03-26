@@ -129,6 +129,8 @@
       gem: name=homesick executable=~/.anyenv/envs/rbenv/shims/gem user_install=False
     - name: 'gem: install cocoapods'
       gem: name=cocoapods executable=~/.anyenv/envs/rbenv/shims/gem user_install=False
+    - name: 'gem: install gisty'
+      gem: name=gisty executable=~/.anyenv/envs/rbenv/shims/gem user_install=False
     - name: 'pip: install powerline'
       command: ~/.anyenv/envs/pyenv/shims/pip2.7 install --user powerline-status
     - name: 'pip: install psutil'
