@@ -22,7 +22,7 @@
       - { name: doxygen }
       - { name: expat }
       - { name: faac }
-      - { name: ffmpeg }
+      - { name: ffmpeg, install_options: with-faac }
       - { name: fswatch }
       - { name: git }
       - { name: git-flow }
@@ -89,6 +89,8 @@
       - eclipse-ide
       - eye-fi
       - firefox
+      - font-m-plus
+      - font-terminus
       - genymotion
       - google-chrome
       - handbrake
@@ -101,6 +103,7 @@
       - java7
       - karabiner
       - kobito
+      - kindle
       - lastfm
       - limechat
       - macvim-kaoriya
@@ -126,60 +129,51 @@
       gem: name=homesick executable=~/.anyenv/envs/rbenv/shims/gem user_install=False
     - name: 'gem: install cocoapods'
       gem: name=cocoapods executable=~/.anyenv/envs/rbenv/shims/gem user_install=False
+    - name: 'gem: install gisty'
+      gem: name=gisty executable=~/.anyenv/envs/rbenv/shims/gem user_install=False
     - name: 'pip: install powerline'
       command: ~/.anyenv/envs/pyenv/shims/pip2.7 install --user powerline-status
     - name: 'pip: install psutil'
       command: ~/.anyenv/envs/pyenv/shims/pip2.7 install --user psutil
-
+    - name: 'npm: install js-beautify'
+      npm: name=js-beautify executable=~/.anyenv/envs/ndenv/shims/npm global=yes state=latest
     - name: 'homebrew: tap homebrew/versions'
       command: brew tap homebrew/versions
-
     - name: 'homebrew: tap caskroom/versions'
       command: brew tap caskroom/versions
-
+    - name: 'homebrew: tap caskroom/homebrew-fonts'
+      command: brew tap caskroom/homebrew-fonts
     - name: 'homebrew: tap supistar/versions'
       command: brew tap supistar/versions
 
   tasks:
     - name: 'Clone dotfiles under home dir'
       command: homesick clone supistar/dotfiles
-
     - name: 'Pull homesick dotfiles'
       command: homesick pull dotfiles
-
     - name: 'Make symlinks to under home dir'
       command: homesick symlink dotfiles --force
-
     - name: 'Copy Ricty fonts'
       shell: cp -f /usr/local/opt/ricty/share/fonts/Ricty*.ttf ~/Library/Fonts/
-
     - name: 'Clone powerline fonts'
       command: git clone git@github.com:powerline/fonts.git /tmp/fonts
-
     - name: 'Install powerline fonts'
       command: sh /tmp/fonts/install.sh
-
     - name: 'Refresh fonts cache'
       command: fc-cache -vf
-
     - name: 'Delete temporary directory for powerline fonts'
       file: path=/tmp/fonts state=absent
-
     - name: mkdir Karabiner dir
       file: path=~/Library/Application\ Support/Karabiner state=directory
-
     - name: 'Karabiner: Make symlink of setting files'
       file: src={{ item }} dest=~/Library/Application\ Support/Karabiner/{{ item | basename }} state=link force=yes
       with_fileglob:
         - ~/.homesick/repos/dotfiles/applications/Karabiner/*
-
     - name: mkdir vim backup dir
       file: path=~/.vim/backup state=directory
-
     - name: mkdir vim-neobundle dir
       file: path=~/.vim/bundle state=directory
       notify: install neobundle
-
     - name: mkdir vim undo dir
       file: path=~/.vim/undo state=directory
 
