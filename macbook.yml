@@ -86,6 +86,7 @@
       - chromium
       - cooviewer
       - dropbox
+      - duet
       - eclipse-ide
       - eye-fi
       - firefox
@@ -117,6 +118,7 @@
       - unity463p2
       - vagrant
       - virtualbox
+      - visual-studio-code
       - vlc
       - vmware-fusion
       - webstorm
