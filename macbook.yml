@@ -57,6 +57,7 @@
       - { name: rmtrash }
       - { name: source-highlight }
       - { name: sqlite }
+      - { name: swig }
       - { name: tig }
       - { name: tmux }
       - { name: tree }
@@ -77,6 +78,7 @@
       - xquartz
       - adobe-air
       - adobe-creative-cloud
+      - air-video-server-hd
       - alfred
       - android-studio
       - appcode
@@ -110,6 +112,7 @@
       - macvim-kaoriya
       - mono-mdk
       - playonmac
+      - pycharm-ce
       - skitch
       - skype
       - slack
