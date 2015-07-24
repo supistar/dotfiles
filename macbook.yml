@@ -150,8 +150,8 @@
       command: brew tap caskroom/versions
     - name: 'homebrew: tap caskroom/homebrew-fonts'
       command: brew tap caskroom/homebrew-fonts
-    - name: 'homebrew: tap supistar/versions'
-      command: brew tap supistar/versions
+    - name: 'homebrew: tap supistar/customs'
+      command: brew tap supistar/customs
 
   tasks:
     - name: 'Clone dotfiles under home dir'
