@@ -24,5 +24,5 @@ source ~/.bash_profile
 sh ./scripts/install-anyenv.sh
 
 # Execute ansible
-ansible-playbook macbook.yml -i hosts
+ansible-playbook ./playbooks/macbook.yml -i hosts
 

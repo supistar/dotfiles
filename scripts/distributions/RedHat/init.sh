@@ -23,5 +23,5 @@ pip install --upgrade pip
 pip install ansible
 
 # Execute ansible
-ansible-playbook redhat.yml -i hosts
+ansible-playbook ./playbooks/redhat.yml -i hosts
 
