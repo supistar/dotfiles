@@ -152,6 +152,8 @@
       command: brew tap caskroom/homebrew-fonts
     - name: 'homebrew: tap supistar/customs'
       command: brew tap supistar/customs
+    - name: 'homebrew: update'
+      command: brew update
 
   tasks:
     - name: 'Clone dotfiles under home dir'
