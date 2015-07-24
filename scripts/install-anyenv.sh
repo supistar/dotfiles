@@ -1,8 +1,8 @@
 #!/bin/sh
 
-RB_VER=2.2.0
+RB_VER=2.2.2
 ND_VER=v0.10.36
-PY_VER=2.7.9
+PY_VER=2.7.10
 
 # Clone anyenv
 git clone https://github.com/riywo/anyenv ~/.anyenv
