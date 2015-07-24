@@ -59,7 +59,7 @@
       - { name: sqlite }
       - { name: swig }
       - { name: tig }
-      - { name: tmux }
+      - { name: tmux2 }
       - { name: tree }
       - { name: watch }
       - { name: wget }
@@ -111,6 +111,7 @@
       - limechat
       - macvim-kaoriya
       - mono-mdk
+      - mono-mdk3121
       - playonmac
       - pycharm-ce
       - skitch
