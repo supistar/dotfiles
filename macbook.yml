@@ -57,8 +57,9 @@
       - { name: rmtrash }
       - { name: source-highlight }
       - { name: sqlite }
+      - { name: swig }
       - { name: tig }
-      - { name: tmux }
+      - { name: tmux2 }
       - { name: tree }
       - { name: watch }
       - { name: wget }
@@ -77,6 +78,7 @@
       - xquartz
       - adobe-air
       - adobe-creative-cloud
+      - air-video-server-hd
       - alfred
       - android-studio
       - appcode
@@ -86,6 +88,7 @@
       - chromium
       - cooviewer
       - dropbox
+      - duet
       - eclipse-ide
       - eye-fi
       - firefox
@@ -108,7 +111,9 @@
       - limechat
       - macvim-kaoriya
       - mono-mdk
+      - mono-mdk3121
       - playonmac
+      - pycharm-ce
       - skitch
       - skype
       - slack
@@ -117,6 +122,7 @@
       - unity463p2
       - vagrant
       - virtualbox
+      - visual-studio-code
       - vlc
       - vmware-fusion
       - webstorm
@@ -145,8 +151,10 @@
       command: brew tap caskroom/versions
     - name: 'homebrew: tap caskroom/homebrew-fonts'
       command: brew tap caskroom/homebrew-fonts
-    - name: 'homebrew: tap supistar/versions'
-      command: brew tap supistar/versions
+    - name: 'homebrew: tap supistar/customs'
+      command: brew tap supistar/customs
+    - name: 'homebrew: update'
+      command: brew update
 
   tasks:
     - name: 'Clone dotfiles under home dir'
