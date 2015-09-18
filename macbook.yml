@@ -16,6 +16,7 @@
       - { name: appledoc22 }
       - { name: autoconf }
       - { name: automake }
+      - { name: chromedriver }
       - { name: cmake }
       - { name: ctags }
       - { name: curl }
