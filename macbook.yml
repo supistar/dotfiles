@@ -147,6 +147,8 @@
       command: ~/.anyenv/envs/pyenv/shims/pip2.7 install --user psutil
     - name: 'npm: install js-beautify'
       npm: name=js-beautify executable=~/.anyenv/envs/ndenv/shims/npm global=yes state=latest
+    - name: 'npm: install git-fire'
+      npm: name=git-fire executable=~/.anyenv/envs/ndenv/shims/npm global=yes state=latest
     - name: 'homebrew: tap homebrew/versions'
       command: brew tap homebrew/versions
     - name: 'homebrew: tap caskroom/versions'
