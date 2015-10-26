@@ -470,10 +470,10 @@ let INFO = xml`
       if (backwards)
         frames = frames.reverse();
 
-      frames.some(function (frame)
-        let (ret = this.find(expr, backwards, this.makeBodyRange(frame)))
-          (ret && (result = this.storage.lastResult = { frame: frame, range: ret}))
-      , this);
+      frames.some(function (frame) {
+        let ret = this.find(expr, backwards, this.makeBodyRange(frame));
+        return ret && (result = this.storage.lastResult = { frame: frame, range: ret});
+      }, this);
 
       this.removeHighlight(color);
 
@@ -493,6 +493,7 @@ let INFO = xml`
     findAgain: function (reverse) {
       let backwards = !!(!this.lastDirection ^ !reverse);
       let last = this.storage.lastResult;
+      let start, end;
 
       let frames = this.currentFrames;
 
@@ -515,7 +516,6 @@ let INFO = xml`
       this.removeHighlight(this.lastColor);
 
       let str = this.lastSearchExpr;
-      let start, end;
 
       let result;
       let ret = this.find(str, backwards, this.makeBodyRange(last.frame), start, end);
@@ -527,10 +527,10 @@ let INFO = xml`
         let [head, tail] = slashArray(frames, last.frame);
         let next = backwards ? head.reverse().concat(tail.reverse())
                              : tail.concat(head);
-        next.some(function (frame)
-          let (ret = this.find(str, backwards, this.makeBodyRange(frame)))
-            (ret && (result = {frame: frame, range: ret}))
-        , this);
+        next.some(function (frame) {
+          let ret = this.find(str, backwards, this.makeBodyRange(frame));
+          return ret && (result = {frame: frame, range: ret});
+        }, this);
       }
 
       this.storage.lastResult = result;
@@ -612,7 +612,9 @@ let INFO = xml`
     },
 
     findAgain: function findAgain (reverse) {
-      if (!MF.findAgain(reverse))
+      if (MF.findAgain(reverse))
+        liberator.echomsg('');
+      else
         liberator.echoerr('not found: ' + MF.lastSearchText);
     },
 
@@ -624,7 +626,9 @@ let INFO = xml`
       }
       if (MF.currentSearchText !== command)
         MF.findFirst(command, forcedBackward);
-      if (!MF.submit())
+      if (MF.submit())
+        liberator.echomsg('');
+      else
         liberator.echoerr('not found: ' + MF.currentSearchText);
     },
 
