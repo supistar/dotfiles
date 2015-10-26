@@ -165,3 +165,9 @@ fi
 UNAME=$(uname | tr '[A-Z]' '[a-z]')
 [ -f $HOME/.zsh/.zshrc_$UNAME ] && . $HOME/.zsh/.zshrc_$UNAME
 
+# For select-word-style
+autoload -Uz select-word-style
+elect-word-style default
+zstyle ':zle:*' word-chars " ./:;@="
+zstyle ':zle:*' word-style unspecified
+
