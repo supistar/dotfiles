@@ -1,0 +1,49 @@
+---
+- hosts: localhost
+  connection: local
+  gather_facts: no
+  sudo: no
+  vars:
+    locale: ja_JP.UTF-8
+    zone: Asia/Tokyo
+    zoneinfo_path: /usr/share/zoneinfo/Asia/Tokyo
+
+  pre_tasks:
+    - name: 'gem: install bundler'
+      gem: name=bundler executable=~/.anyenv/envs/rbenv/shims/gem user_install=False
+    - name: 'gem: install homesick'
+      gem: name=homesick executable=~/.anyenv/envs/rbenv/shims/gem user_install=False
+    - name: 'gem: install gisty'
+      gem: name=gisty executable=~/.anyenv/envs/rbenv/shims/gem user_install=False
+    - name: 'pip: update pip'
+      command: ~/.anyenv/envs/pyenv/shims/pip2.7 install --upgrade pip
+    - name: 'pip: install powerline'
+      command: ~/.anyenv/envs/pyenv/shims/pip2.7 install --user powerline-status
+    - name: 'pip: install psutil'
+      command: ~/.anyenv/envs/pyenv/shims/pip2.7 install --user psutil
+    - name: 'npm: install js-beautify'
+      npm: name=js-beautify executable=~/.anyenv/envs/ndenv/shims/npm global=yes state=latest
+
+  tasks:
+    - name: 'Install essential packages'
+      pacman: name={{ item }} state=latest
+      with_items:
+        - tmux
+    - name: 'Clone dotfiles under home dir'
+      command: homesick clone supistar/dotfiles
+    - name: 'Pull homesick dotfiles'
+      command: homesick pull dotfiles
+    - name: 'Make symlinks to under home dir'
+      command: homesick symlink dotfiles --force
+    - name: mkdir vim backup dir
+      file: path=~/.vim/backup state=directory
+    - name: mkdir vim-neobundle dir
+      file: path=~/.vim/bundle state=directory
+      notify: install neobundle
+    - name: mkdir vim undo dir
+      file: path=~/.vim/undo state=directory
+
+  handlers:
+    - name: install neobundle
+      command: git clone git://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
+
