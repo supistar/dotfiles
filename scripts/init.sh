@@ -1,26 +1,23 @@
 #!/bin/sh
 
-# Agree Xcode llcense
-sudo xcodebuild -license
+SYS_NAME=$(uname)
+YUM_PATH=/usr/bin/yum
+APT_PATH=/usr/bin/apt-get
 
-# Install homebrew
-ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-brew doctor
-
-# Update homebrew
-brew install git
-brew update
-
-# Install ansible and roles
-brew install ansible
-ansible-galaxy install hnakamur.homebrew-packages
-ansible-galaxy install hnakamur.homebrew-cask-packages
-
-# Set anyenv path
-sh ./scripts/set-anyenv-path.sh bash_profile
-# Install anyenv
-sh ./scripts/install-anyenv.sh
-
-# Execute ansible
-ansible-playbook macbook.yml -i hosts
-
+if test "${SYS_NAME}" == "Darwin"; then
+  echo "Platform : Mac"
+  sh ./scripts/distributions/Mac/init.sh
+elif test "${SYS_NAME}" == "Linux"; then
+  echo "Platform : Linux"
+  if test -e ${YUM_PATH}; then
+    echo "Package manager : yum"
+    sh ./scripts/distributions/RedHat/init.sh
+  elif test -e ${APT_PATH}; then
+    echo "Package manager : apt"
+    sh ./scripts/distributions/Debian/init.sh
+  else
+    echo "Can not detect Linux package manager. Quitting... :("
+  fi
+else
+  echo "Platform : Others. \nSupported platforms are Mac/RedHat/Debian. Quitting... :("
+fi

@@ -21,6 +21,3 @@ echo 'for D in `ls $HOME/.anyenv/envs`' >> ~/.$1
 echo 'do' >> ~/.$1
 echo '  export PATH="$HOME/.anyenv/envs/$D/shims:$PATH" ' >> ~/.$1
 echo 'done' >> ~/.$1
-
-# Reload
-exec $SHELL -l
