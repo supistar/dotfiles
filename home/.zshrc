@@ -29,25 +29,9 @@ alias ls='ls -G'
 alias ll='ls -lG'
 alias la='ls -AG'
 alias l='ls -CFG'
-alias rm='rmtrash'
-
-# Settings of MacVim / "vi" and "vim" mapping to MacVim
-export EDITOR=${HOME}/Applications/MacVim.app/Contents/MacOS/Vim
-alias vi='env LANG=ja_JP.UTF-8 ${HOME}/Applications/MacVim.app/Contents/MacOS/Vim "$@"'
-alias vim='env LANG=ja_JP.UTF-8 ${HOME}/Applications/MacVim.app/Contents/MacOS/Vim "$@"'
 
 # For vless
 alias vless='/usr/share/vim/vim73/macros/less.sh'
-
-# For mosh
-alias mssh=mosh
-
-# Disable auto correction
-alias pod='nocorrect pod'
-alias tree='nocorrect tree'
-alias rspec='nocorrect rspec'
-alias ino='nocorrect ino'
-alias http='nocorrect http'
 
 # less customize
 export LESS='-R -X -i -P ?f%f:(stdin).  ?lb%lb?L/%L..  [?eEOF:?pb%pb\%..]'
@@ -111,12 +95,6 @@ function ls_abbrev() {
 # For autojump
 [[ -s /etc/profile.d/autojump.sh ]] && . /etc/profile.d/autojump.sh
 
-# For z
-. `brew --prefix`/etc/profile.d/z.sh
-function precmd () {
-       z --add "$(pwd -P)"
-}
-
 # Call precmd
 function call_precmd() {
     local precmd_func
@@ -160,50 +138,11 @@ function do_enter() {
 zle -N do_enter
 bindkey '^m' do_enter
 
-# For Japanese
-export LC_CTYPE="ja_JP.UTF-8"
-
 # For Personal libraries
 export PATH=/usr/local/bin:$PATH
 
-# For Android Development
-export ANDROID_HOME=/usr/local/opt/android-sdk
-
 # For tmux scripts
 export PATH=$HOME/.tmux/scripts:$PATH
-
-# For Qt
-export PATH=$PATH:/Applications/Qt5.1.1/5.1.1/clang_64/bin
-
-# Add environment variable COCOS_CONSOLE_ROOT for cocos2d-x
-export COCOS_CONSOLE_ROOT=/usr/local/share/cocos2d-x-3.0/tools/cocos2d-console/bin
-export PATH=$COCOS_CONSOLE_ROOT:$PATH
-
-# Add environment variable NDK_ROOT for cocos2d-x
-export NDK_ROOT=/usr/local/opt/android-ndk
-export PATH=$NDK_ROOT:$PATH
-
-# Add environment variable ANDROID_SDK_ROOT for cocos2d-x
-export ANDROID_SDK_ROOT=/usr/local/opt/android-sdk
-export PATH=$ANDROID_SDK_ROOT:$PATH
-export PATH=$ANDROID_SDK_ROOT/tools:$ANDROID_SDK_ROOT/platform-tools:$PATH
-
-# Add environment variable ANT_ROOT for cocos2d-x
-export ANT_ROOT=/usr/local/bin
-export PATH=$ANT_ROOT:$PATH
-
-# For Java development
-export JAVA_HOME=$(/usr/libexec/java_home -v 1.7)
-export MAVEN_OPTS='-Xmx1024m -XX:MaxPermSize=256m'
-
-# zsh completion
-if [ -e /usr/local/share/zsh-completions ]; then
-    fpath=(/usr/local/share/zsh-completions $fpath)
-fi
-
-# For auto completion
-autoload -Uz compinit
-compinit -u
 
 # For powerline
 export PATH=$HOME/.local/bin:$PATH
@@ -211,7 +150,7 @@ source $HOME/.local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline
 
 # Add anyenv to PATH for scripting
 export PATH="$HOME/.anyenv/bin:$PATH"
-eval "$(anyenv init -)"
+eval "$(anyenv init - zsh)"
 for D in `ls $HOME/.anyenv/envs`
 do
   export PATH="$HOME/.anyenv/envs/$D/shims:$PATH" 
@@ -221,3 +160,8 @@ done
 if [ -e $HOME/.credentials ]; then
     source $HOME/.credentials
 fi
+
+# For each environments
+UNAME=$(uname | tr '[A-Z]' '[a-z]')
+[ -f $HOME/.zsh/.zshrc_$UNAME ] && . $HOME/.zsh/.zshrc_$UNAME
+

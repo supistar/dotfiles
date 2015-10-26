@@ -1,0 +1,4 @@
+# Settings of vim
+export EDITOR=vim
+alias vi=vim
+
