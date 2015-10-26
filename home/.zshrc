@@ -167,7 +167,7 @@ UNAME=$(uname | tr '[A-Z]' '[a-z]')
 
 # For select-word-style
 autoload -Uz select-word-style
-elect-word-style default
+select-word-style default
 zstyle ':zle:*' word-chars " ./:;@="
 zstyle ':zle:*' word-style unspecified
 
