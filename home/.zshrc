@@ -1,3 +1,7 @@
+# For each environments
+UNAME=$(uname | tr '[A-Z]' '[a-z]')
+[ -f $HOME/.zsh/.zshrc_$UNAME ] && . $HOME/.zsh/.zshrc_$UNAME
+
 ### zsh core
 # command correction
 setopt correct
@@ -160,10 +164,6 @@ done
 if [ -e $HOME/.credentials ]; then
     source $HOME/.credentials
 fi
-
-# For each environments
-UNAME=$(uname | tr '[A-Z]' '[a-z]')
-[ -f $HOME/.zsh/.zshrc_$UNAME ] && . $HOME/.zsh/.zshrc_$UNAME
 
 # For select-word-style
 autoload -Uz select-word-style
