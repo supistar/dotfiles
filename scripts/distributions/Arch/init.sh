@@ -12,6 +12,8 @@ sh ./scripts/set-anyenv-path.sh bash_profile
 source ~/.bash_profile
 # Install anyenv
 sh ./scripts/install-anyenv.sh
+# Install git-flow
+sh ./scripts/distributions/Arch/install-gitflow.sh
 
 # Update pip
 pip install --upgrade pip
