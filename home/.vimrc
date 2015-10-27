@@ -35,6 +35,7 @@ set cindent
 set autoindent
 set noswapfile
 set nobackup
+set undofile
 set undodir=~/.vim/undo
 set browsedir=buffer
 set clipboard=unnamed
