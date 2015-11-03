@@ -29,6 +29,8 @@
       pacman: name={{ item }} state=latest update_cache=yes
       with_items:
         - tmux
+        - bluez
+        - bluez-utils
     - name: 'Clone dotfiles under home dir'
       command: homesick clone supistar/dotfiles
     - name: 'Pull homesick dotfiles'
