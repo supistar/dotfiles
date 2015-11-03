@@ -27,6 +27,7 @@
   tasks:
     - name: 'Install essential packages'
       pacman: name={{ item }} state=latest update_cache=yes
+      sudo: yes
       with_items:
         - tmux
         - bluez
