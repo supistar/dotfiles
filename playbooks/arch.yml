@@ -26,9 +26,12 @@
 
   tasks:
     - name: 'Install essential packages'
-      pacman: name={{ item }} state=latest
+      pacman: name={{ item }} state=latest update_cache=yes
+      sudo: yes
       with_items:
         - tmux
+        - bluez
+        - bluez-utils
     - name: 'Clone dotfiles under home dir'
       command: homesick clone supistar/dotfiles
     - name: 'Pull homesick dotfiles'
