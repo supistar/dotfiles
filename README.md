@@ -5,7 +5,13 @@ This is my dotfiles repository :fire:
 This repository build up with following tools:
 - [ansible](http://www.ansible.com/home)
 - [anyenv](https://github.com/riywo/anyenv)
-- [homesick](https://github.com/technicalpickles/homesick) : For Mac environment
+- [homesick](https://github.com/technicalpickles/homesick)
+
+### Supported environments
+
+- Mac OSX
+- RedHat Linux (Amazon Linux)
+- Arch Linux
 
 ### Prerequisite
 
@@ -21,6 +27,11 @@ curl -LSfs https://raw.githubusercontent.com/supistar/dotfiles/master/install.sh
 
 If you want to update packages which are described in YAML file, just type following command in your terminal :)
 ```bash
+* Mac
 ansible-playbook ./playbooks/macbook.yml -i hosts
+* RedHat Linux (Amazon Linux)
+ansible-playbook ./playbooks/redhat.yml -i hosts -K
+* Arch Linux
+ansible-playbook ./playbooks/arch.yml -i hosts -K
 ```
 
