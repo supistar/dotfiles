@@ -26,7 +26,7 @@
 
   tasks:
     - name: 'Install essential packages'
-      pacman: name={{ item }} state=latest
+      pacman: name={{ item }} state=latest update_cache=yes
       with_items:
         - tmux
     - name: 'Clone dotfiles under home dir'
