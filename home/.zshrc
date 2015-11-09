@@ -171,3 +171,7 @@ select-word-style default
 zstyle ':zle:*' word-chars " ./:;@="
 zstyle ':zle:*' word-style unspecified
 
+# Enable auto-activation of virtualenv
+if which pyenv > /dev/null 2>&1; then
+    eval "$(pyenv virtualenv-init -)"
+fi
