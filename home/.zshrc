@@ -168,7 +168,7 @@ fi
 # For select-word-style
 autoload -Uz select-word-style
 select-word-style default
-zstyle ':zle:*' word-chars " ./:;@="
+zstyle ':zle:*' word-chars " ./:;@=-_"
 zstyle ':zle:*' word-style unspecified
 
 # Enable auto-activation of virtualenv
