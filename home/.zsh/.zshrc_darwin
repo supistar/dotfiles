@@ -63,3 +63,14 @@ fi
 autoload -Uz compinit
 compinit -u
 
+# For git completion
+__git_files () { 
+    _wanted files expl 'local files' _files
+}
+
+# For brew cask maintenance
+alias brew-cask-check-outdated='for c in /opt/homebrew-cask/Caskroom/*; do vl=(`ls -t $c`) && for v in "${vl[@]:1}"; do echo "$c/$v"; done; done'
+alias brew-cask-clean-outdated='for c in /opt/homebrew-cask/Caskroom/*; do vl=(`ls -t $c`) && for v in "${vl[@]:1}"; do sudo rm -rf "$c/$v"; done; done'
+
+# For GO
+export GOPATH=$HOME/Go
