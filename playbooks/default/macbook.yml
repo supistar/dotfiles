@@ -178,9 +178,9 @@
     - name: 'Delete temporary directory for powerline fonts'
       file: path=/tmp/fonts state=absent
     - name: 'mkdir Karabiner dir'
-      file: path=~/Library/Application\ Support/Karabiner state=directory
+      file: path="~/Library/Application Support/Karabiner" state=directory
     - name: 'Karabiner: Make symlink of setting files'
-      file: src={{ item }} dest=~/Library/Application\ Support/Karabiner/{{ item | basename }} state=link force=yes
+      file: src={{ item }} dest="~/Library/Application Support/Karabiner/{{ item | basename }}" state=link force=yes
       with_fileglob:
         - ~/.homesick/repos/dotfiles/applications/Karabiner/*
     - name: 'mkdir vim backup dir'
