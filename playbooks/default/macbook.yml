@@ -9,6 +9,7 @@
       - sanemat/font
 
     homebrew_packages_packages:
+      - { name: gcc }
       - { name: android-sdk }
       - { name: android-ndk }
       - { name: ant }
