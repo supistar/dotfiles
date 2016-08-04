@@ -23,7 +23,9 @@ cd ${DIRECTORY}
 # Do install
 sh ./scripts/init.sh $2
 # Post-process
-rm -rf ${TMP_DIR}/${DIRECTORY} ${TMP_DIR}/${ARCHIVE}
+if [ [ -n "${TMP_DIR}" ] -a [ -n "${DIRECTORY}" ] -a [ -n "${TMP_DIR}/${ARCHIVE}" ] ]; then
+    rm -rf "${TMP_DIR}/${DIRECTORY}" "${TMP_DIR}/${ARCHIVE}"
+fi
 popd > /dev/null
 
 echo "*** Installation completed! ***"
