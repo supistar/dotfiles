@@ -27,8 +27,8 @@ curl -LSfs https://raw.githubusercontent.com/supistar/dotfiles/master/install.sh
 
 or
 
-# Install via specified branch (master) and machine type (ci)
-curl -LSfs https://raw.githubusercontent.com/supistar/dotfiles/master/install.sh | xargs -I % bash % master ci
+# Install via specified branch (feature/new-package) and machine type (ci)
+curl -LSfs https://raw.githubusercontent.com/supistar/dotfiles/feature/new-package/install.sh | bash -s feature/new-package ci
 ```
 
 If you want to update packages which are described in YAML file, just type following command in your terminal :)
