@@ -13,14 +13,17 @@ echo "*** Installation start ***"
 # Move to temporary dir
 pushd ${TMP_DIR} > /dev/null
 # Download dotfiles from master
-curl -LSfs -O https://github.com/supistar/dotfiles/archive/master.zip
+BRANCH=${1:-master}
+curl -LSfs -O https://github.com/supistar/dotfiles/archive/${BRANCH}.zip
 # Unzip
-unzip master.zip
-cd dotfiles-master
+ARCHIVE="$(echo ${BRANCH} | awk -F/ '{print $NF}').zip"
+unzip ${ARCHIVE}
+DIRECTORY="dotfiles-$(echo ${BRANCH} | sed -e 's/\//-/g')"
+cd ${DIRECTORY}
 # Do install
-sh ./scripts/init.sh
+sh ./scripts/init.sh $2
 # Post-process
-rm -rf ${TMP_DIR}/dotfiles-master ${TMP_DIR}/master.zip
+rm -rf ${TMP_DIR}/${DIRECTORY} ${TMP_DIR}/${ARCHIVE}
 popd > /dev/null
 
 echo "*** Installation completed! ***"

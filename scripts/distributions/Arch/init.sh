@@ -24,5 +24,6 @@ pip install ansible
 sudo ln -sf /usr/bin/python2 /usr/bin/python
 
 # Execute ansible
-ansible-playbook ./playbooks/arch.yml -i hosts
+TARGET=${1:-default}
+ansible-playbook ./playbooks/${TARGET}/arch.yml -i hosts
 

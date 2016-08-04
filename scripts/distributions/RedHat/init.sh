@@ -23,5 +23,6 @@ pip install --upgrade pip
 pip install ansible
 
 # Execute ansible
-ansible-playbook ./playbooks/redhat.yml -i hosts
+TARGET=${1:-default}
+ansible-playbook ./playbooks/${TARGET}/redhat.yml -i hosts
 
