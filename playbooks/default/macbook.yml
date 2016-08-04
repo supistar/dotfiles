@@ -42,6 +42,7 @@
       - { name: jq }
       - { name: jsdoc-toolkit }
       - { name: lame }
+      - { name: libevent }
       - { name: libpng }
       - { name: libtool }
       - { name: libusb }
