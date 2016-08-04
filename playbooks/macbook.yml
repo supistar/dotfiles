@@ -177,22 +177,22 @@
       command: fc-cache -vf
     - name: 'Delete temporary directory for powerline fonts'
       file: path=/tmp/fonts state=absent
-    - name: mkdir Karabiner dir
+    - name: 'mkdir Karabiner dir'
       file: path=~/Library/Application\ Support/Karabiner state=directory
     - name: 'Karabiner: Make symlink of setting files'
       file: src={{ item }} dest=~/Library/Application\ Support/Karabiner/{{ item | basename }} state=link force=yes
       with_fileglob:
         - ~/.homesick/repos/dotfiles/applications/Karabiner/*
-    - name: mkdir vim backup dir
+    - name: 'mkdir vim backup dir'
       file: path=~/.vim/backup state=directory
-    - name: mkdir vim-neobundle dir
+    - name: 'mkdir vim-neobundle dir'
       file: path=~/.vim/bundle state=directory
       notify: install neobundle
-    - name: mkdir vim undo dir
+    - name: 'mkdir vim undo dir'
       file: path=~/.vim/undo state=directory
 
   handlers:
-    - name: install neobundle
+    - name: 'install neobundle'
       command: git clone git://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
 
   roles:
