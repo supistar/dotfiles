@@ -98,25 +98,15 @@ function ls_abbrev() {
 # For autojump
 [[ -s /etc/profile.d/autojump.sh ]] && . /etc/profile.d/autojump.sh
 
-# Call precmd
-function call_precmd() {
-    local precmd_func
-    (( $+functions[precmd] )) && precmd
-    for precmd_func in $precmd_functions; do
-        $precmd_func
-    done
-}
-
 # Move to upper directory as ^
 cdup() {
     if [ -z "$BUFFER" ]; then
         echo
         cd ..
-        call_precmd
         zle reset-prompt
     else
         zle self-insert '^'
-        fi
+    fi
 }
 zle -N cdup
 bindkey '\^' cdup
