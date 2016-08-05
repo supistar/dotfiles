@@ -128,7 +128,7 @@ let g:asdfghjkl_default = "true"
 let g:direct_sbm_use_services_by_tag = "h"
 let g:direct_sbm_use_services_by_post = "h"
 
-source! ~/_vimperatorrc.local
+source! ~/.vimperatorrc.local
 
 " ----- Finish Loading -----
 
