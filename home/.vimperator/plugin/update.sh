@@ -17,7 +17,12 @@ PLUGINS=( \
 #    "xpath_hint.js" \
 #)
 
+SCRIPT_DIR=`dirname $0`
+pushd ${SCRIPT_DIR}
+
+# Download plugins
 for plugin in "${PLUGINS[@]}"; do
     wget -O ${plugin} https://raw.githubusercontent.com/vimpr/vimperator-plugins/master/${plugin} --no-check-certificate
 done
 
+popd
