@@ -9,6 +9,7 @@
       - sanemat/font
 
     homebrew_packages_packages:
+      - { name: gcc }
       - { name: android-sdk }
       - { name: android-ndk }
       - { name: ant }
@@ -22,25 +23,18 @@
       - { name: curl }
       - { name: doxygen }
       - { name: expat }
-      - { name: faac }
-      - { name: ffmpeg, install_options: with-faac }
       - { name: fswatch }
       - { name: git }
       - { name: git-flow }
-      - { name: gnupg }
       - { name: go }
       - { name: gradle }
-      - { name: heroku-toolbelt }
       - { name: highlight }
       - { name: httpie }
       - { name: hub }
-      - { name: icu4c }
-      - { name: imagemagick }
-      - { name: ino }
       - { name: ios-sim }
       - { name: jq }
       - { name: jsdoc-toolkit }
-      - { name: lame }
+      - { name: libevent }
       - { name: libpng }
       - { name: libtool }
       - { name: libusb }
@@ -66,69 +60,28 @@
       - { name: wget }
       - { name: wine }
       - { name: winetricks }
-      - { name: x264 }
       - { name: xctool }
-      - { name: xvid }
-      - { name: yasm }
-      - { name: yuicompressor }
       - { name: z }
       - { name: zsh }
       - { name: zsh-completions }
 
     homebrew_cask_packages_packages:
       - xquartz
-      - adobe-air
-      - adobe-creative-cloud
-      - air-video-server-hd
       - alfred
       - android-studio
-      - appcode
-      - arduino
-      - burn
-      - chromecast
-      - chromium
-      - cooviewer
-      - dropbox
-      - duet
-      - eclipse-ide
-      - eye-fi
       - firefox
       - font-m-plus
       - font-terminus
-      - genymotion
       - google-chrome
-      - handbrake
-      - hipchat
-      - horndis
-      - inkscape
-      - intellij-idea-ce
       - iterm2
       - java
       - java6
       - java7
       - karabiner
-      - kobito
-      - kindle
-      - lastfm
-      - limechat
       - macvim-kaoriya
-      - mono-mdk
-      - mono-mdk3121
-      - playonmac
-      - pycharm-ce
-      - skitch
-      - skype
-      - slack
-      - splashtop-personal
       - sublime-text
-      - unity463p2
       - vagrant
       - virtualbox
-      - visual-studio-code
-      - vlc
-      - vmware-fusion
-      - webstorm
-      - xamarin-studio
 
   pre_tasks:
     - name: 'gem: install bundler'
@@ -177,22 +130,22 @@
       command: fc-cache -vf
     - name: 'Delete temporary directory for powerline fonts'
       file: path=/tmp/fonts state=absent
-    - name: mkdir Karabiner dir
-      file: path=~/Library/Application\ Support/Karabiner state=directory
+    - name: 'mkdir Karabiner dir'
+      file: path="~/Library/Application Support/Karabiner" state=directory
     - name: 'Karabiner: Make symlink of setting files'
-      file: src={{ item }} dest=~/Library/Application\ Support/Karabiner/{{ item | basename }} state=link force=yes
+      file: src={{ item }} dest="~/Library/Application Support/Karabiner/{{ item | basename }}" state=link force=yes
       with_fileglob:
         - ~/.homesick/repos/dotfiles/applications/Karabiner/*
-    - name: mkdir vim backup dir
+    - name: 'mkdir vim backup dir'
       file: path=~/.vim/backup state=directory
-    - name: mkdir vim-neobundle dir
+    - name: 'mkdir vim-neobundle dir'
       file: path=~/.vim/bundle state=directory
       notify: install neobundle
-    - name: mkdir vim undo dir
+    - name: 'mkdir vim undo dir'
       file: path=~/.vim/undo state=directory
 
   handlers:
-    - name: install neobundle
+    - name: 'install neobundle'
       command: git clone git://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
 
   roles:

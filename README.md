@@ -22,16 +22,22 @@ Some package require Xcode environment to build their own.
 
 Just type following command in your terminal.
 ```bash
+# Install normally
 curl -LSfs https://raw.githubusercontent.com/supistar/dotfiles/master/install.sh | bash
+
+or
+
+# Install via specified branch (feature/new-package) and machine type (ci)
+curl -LSfs https://raw.githubusercontent.com/supistar/dotfiles/feature/new-package/install.sh | bash -s feature/new-package ci
 ```
 
 If you want to update packages which are described in YAML file, just type following command in your terminal :)
 ```bash
 * Mac
-ansible-playbook ./playbooks/macbook.yml -i hosts
+ansible-playbook ./playbooks/default/macbook.yml -i hosts
 * RedHat Linux (Amazon Linux)
-ansible-playbook ./playbooks/redhat.yml -i hosts -K
+ansible-playbook ./playbooks/default/redhat.yml -i hosts -K
 * Arch Linux
-ansible-playbook ./playbooks/arch.yml -i hosts -K
+ansible-playbook ./playbooks/default/arch.yml -i hosts -K
 ```
 
