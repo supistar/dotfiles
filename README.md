@@ -22,6 +22,14 @@ Some package require Xcode environment to build their own.
 
 Just type following command in your terminal.
 ```bash
+# (Optional) If your environment is OSX, please check Xcode related tools are installed properly
+# Check Xcode.app developer path
+xcode-select -p
+> /Applications/Xcode.app/Contents/Developer
+# Check command line tools installation
+xcode-select --install
+> xcode-select: error: command line tools are already installed, use "Software Update" to install updates
+
 # Install normally
 curl -LSfs https://raw.githubusercontent.com/supistar/dotfiles/master/install.sh | bash
 
