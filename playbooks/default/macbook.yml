@@ -153,6 +153,8 @@
       npm: name=git-fire executable=~/.anyenv/envs/ndenv/shims/npm global=yes state=latest
     - name: 'homebrew: tap homebrew/versions'
       command: brew tap homebrew/versions
+    - name: 'homebrew: tap caskroom/cask'
+      command: brew tap caskroom/cask
     - name: 'homebrew: tap caskroom/versions'
       command: brew tap caskroom/versions
     - name: 'homebrew: tap caskroom/homebrew-fonts'
