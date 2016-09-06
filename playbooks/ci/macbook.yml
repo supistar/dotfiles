@@ -3,85 +3,6 @@
   connection: local
   gather_facts: no
   sudo: no
-  vars:
-
-    homebrew_packages_taps:
-      - sanemat/font
-
-    homebrew_packages_packages:
-      - { name: gcc }
-      - { name: android-sdk }
-      - { name: android-ndk }
-      - { name: ant }
-      - { name: apktool }
-      - { name: appledoc22 }
-      - { name: autoconf }
-      - { name: automake }
-      - { name: chromedriver }
-      - { name: cmake }
-      - { name: ctags }
-      - { name: curl }
-      - { name: doxygen }
-      - { name: expat }
-      - { name: fswatch }
-      - { name: git }
-      - { name: git-flow }
-      - { name: go }
-      - { name: gradle }
-      - { name: highlight }
-      - { name: httpie }
-      - { name: hub }
-      - { name: ios-sim }
-      - { name: jq }
-      - { name: jsdoc-toolkit }
-      - { name: libevent }
-      - { name: libpng }
-      - { name: libtool }
-      - { name: libusb }
-      - { name: libusb-compat }
-      - { name: libxml2 }
-      - { name: libyaml }
-      - { name: maven }
-      - { name: nkf }
-      - { name: phantomjs }
-      - { name: pkg-config }
-      - { name: psutils }
-      - { name: reattach-to-user-namespace }
-      - { name: redis }
-      - { name: ricty, install_options: powerline, vim-powerline }
-      - { name: rmtrash }
-      - { name: source-highlight }
-      - { name: sqlite }
-      - { name: swig }
-      - { name: tig }
-      - { name: tmux2 }
-      - { name: tree }
-      - { name: watch }
-      - { name: wget }
-      - { name: wine }
-      - { name: winetricks }
-      - { name: xctool }
-      - { name: z }
-      - { name: zsh }
-      - { name: zsh-completions }
-
-    homebrew_cask_packages_packages:
-      - xquartz
-      - alfred
-      - android-studio
-      - firefox
-      - font-m-plus
-      - font-terminus
-      - google-chrome
-      - iterm2
-      - java
-      - java6
-      - java7
-      - karabiner
-      - macvim-kaoriya
-      - sublime-text
-      - vagrant
-      - virtualbox
 
   pre_tasks:
     - name: 'gem: install bundler'
@@ -102,18 +23,97 @@
       npm: name=js-beautify executable=~/.anyenv/envs/ndenv/shims/npm global=yes state=latest
     - name: 'npm: install git-fire'
       npm: name=git-fire executable=~/.anyenv/envs/ndenv/shims/npm global=yes state=latest
-    - name: 'homebrew: tap homebrew/versions'
-      command: brew tap homebrew/versions
-    - name: 'homebrew: tap caskroom/versions'
-      command: brew tap caskroom/versions
-    - name: 'homebrew: tap caskroom/homebrew-fonts'
-      command: brew tap caskroom/homebrew-fonts
-    - name: 'homebrew: tap supistar/customs'
-      command: brew tap supistar/customs
+    - name: 'Tap homebrew repositories'
+      homebrew_tap: tap={{ item }} state=present
+      with_items: 
+        - caskroom/cask
+        - caskroom/versions
+        - caskroom/homebrew-fonts
+        - homebrew/versions
+        - sanemat/font
+        - supistar/customs
     - name: 'homebrew: update'
       command: brew update
 
   tasks:
+    - name: 'Install Homebrew cask packages'
+      homebrew_cask: name={{ item }}
+      with_items:
+        - xquartz
+        - alfred
+        - android-studio
+        - firefox
+        - font-m-plus
+        - font-terminus
+        - google-chrome
+        - iterm2
+        - java
+        - java6
+        - java7
+        - karabiner
+        - macvim-kaoriya
+        - sublime-text
+        - vagrant
+        - virtualbox
+    - name: 'Install Homebrew packages'
+      homebrew: name={{ item }} state=latest
+      with_items:
+        - gcc
+        - android-sdk
+        - android-ndk
+        - ant
+        - apktool
+        - homebrew/versions/appledoc22
+        - autoconf
+        - automake
+        - chromedriver
+        - cmake
+        - ctags
+        - curl
+        - doxygen
+        - expat
+        - fswatch
+        - git
+        - git-flow
+        - go
+        - gradle
+        - highlight
+        - httpie
+        - hub
+        - ios-sim
+        - jq
+        - jsdoc3
+        - libevent
+        - libpng
+        - libtool
+        - libusb
+        - libusb-compat
+        - libxml2
+        - libyaml
+        - maven
+        - nkf
+        - phantomjs
+        - pkg-config
+        - psutils
+        - reattach-to-user-namespace
+        - redis
+        - rmtrash
+        - source-highlight
+        - sqlite
+        - swig
+        - tig
+        - tmux2
+        - tree
+        - watch
+        - wget
+        - wine
+        - winetricks
+        - xctool
+        - z
+        - zsh
+        - zsh-completions
+    - name: 'Install Homebrew packages: ricty'
+      homebrew: name=ricty state=latest install_options=powerline,vim-powerline
     - name: 'Clone dotfiles under home dir'
       command: homesick clone supistar/dotfiles
     - name: 'Pull homesick dotfiles'
@@ -148,6 +148,3 @@
     - name: 'install neobundle'
       command: git clone git://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
 
-  roles:
-    - hnakamur.homebrew-cask-packages
-    - hnakamur.homebrew-packages
