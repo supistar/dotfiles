@@ -3,7 +3,6 @@
 TMP_DIR=/tmp
 
 # Check Xcode.app and command line tools existence
-
 if [ $(uname) == "Darwin" ]; then
     if [ ! -e "$(xcode-select -p)" ]; then
         echo "*** [Error] There is no Xcode.app, please install it first ***"
@@ -13,7 +12,6 @@ if [ $(uname) == "Darwin" ]; then
     if [ ! -e "$(xcrun --show-sdk-path)/usr/include/zlib.h" ]; then
         echo "*** [Error] There is no Xcode command line tools, please install it by `$ xcode-select --install` ***"
         exit 1
-
     fi
 fi
 
