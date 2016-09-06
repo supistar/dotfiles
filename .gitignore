@@ -7,3 +7,6 @@ home/.vim/bundle/
 home/.vim/undo/
 home/.vim/.netrwhist
 
+# Retry file
+*.retry
+
