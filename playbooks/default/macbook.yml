@@ -40,6 +40,7 @@
       homebrew_cask: name={{ item }}
       with_items:
         - xquartz
+        - 1password
         - adobe-air
         - adobe-creative-cloud
         - alfred
@@ -55,12 +56,14 @@
         - font-m-plus
         - font-terminus
         - google-chrome
+        - hhkb-professional-driver
         - intellij-idea
         - iterm2
         - java
         - java6
         - java7
         - karabiner
+        - kensington-trackball-works
         - kindle
         - lastfm
         - limechat
@@ -80,6 +83,7 @@
         - vmware-fusion
         - webstorm
         - xamarin-studio
+        - xmind
     - name: 'Install Homebrew packages'
       homebrew: name={{ item }} state=latest
       with_items:
@@ -134,7 +138,7 @@
         - sqlite
         - swig
         - tig
-        - tmux2
+        - tmux
         - tree
         - watch
         - wget
