@@ -88,7 +88,7 @@
         - android-ndk
         - ant
         - apktool
-        - versions/appledoc22
+        - homebrew/versions/appledoc22
         - autoconf
         - automake
         - chromedriver
@@ -113,7 +113,7 @@
         - ino
         - ios-sim
         - jq
-        - jsdoc-toolkit
+        - jsdoc3
         - lame
         - libevent
         - libpng

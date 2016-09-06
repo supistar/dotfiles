@@ -63,7 +63,7 @@
         - android-ndk
         - ant
         - apktool
-        - appledoc22
+        - homebrew/versions/appledoc22
         - autoconf
         - automake
         - chromedriver
@@ -82,7 +82,7 @@
         - hub
         - ios-sim
         - jq
-        - jsdoc-toolkit
+        - jsdoc3
         - libevent
         - libpng
         - libtool
