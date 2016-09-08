@@ -32,6 +32,7 @@
         - homebrew/versions
         - sanemat/font
         - supistar/customs
+        - tkengo/highway
     - name: 'homebrew: update'
       command: brew update
 
@@ -95,6 +96,7 @@
         - homebrew/versions/appledoc22
         - autoconf
         - automake
+        - blueutil
         - chromedriver
         - cmake
         - ctags
@@ -110,6 +112,7 @@
         - gradle
         - heroku-toolbelt
         - highlight
+        - highway
         - httpie
         - hub
         - icu4c
