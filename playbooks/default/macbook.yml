@@ -96,6 +96,7 @@
         - homebrew/versions/appledoc22
         - autoconf
         - automake
+        - blueutil
         - chromedriver
         - cmake
         - ctags
