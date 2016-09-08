@@ -9,20 +9,25 @@
     zoneinfo_path: /usr/share/zoneinfo/Asia/Tokyo
 
   pre_tasks:
-    - name: 'gem: install bundler'
-      gem: name=bundler executable=~/.anyenv/envs/rbenv/shims/gem user_install=False
-    - name: 'gem: install homesick'
-      gem: name=homesick executable=~/.anyenv/envs/rbenv/shims/gem user_install=False
-    - name: 'gem: install gisty'
-      gem: name=gisty executable=~/.anyenv/envs/rbenv/shims/gem user_install=False
-    - name: 'pip: update pip'
-      command: ~/.anyenv/envs/pyenv/shims/pip2.7 install --upgrade pip
-    - name: 'pip: install powerline'
-      command: ~/.anyenv/envs/pyenv/shims/pip2.7 install --user powerline-status
-    - name: 'pip: install psutil'
-      command: ~/.anyenv/envs/pyenv/shims/pip2.7 install --user psutil
-    - name: 'npm: install js-beautify'
-      npm: name=js-beautify executable=~/.anyenv/envs/ndenv/shims/npm global=yes state=latest
+    - name: 'Install gem packages'
+      gem: name={{ item }} executable=~/.anyenv/envs/rbenv/shims/gem user_install=False
+      with_items:
+        - bundler
+        - homesick
+        - cocoapods
+        - gisty
+    - name: 'Update pip'
+      pip: name=pip executable=~/.anyenv/envs/pyenv/shims/pip2.7 state=latest
+    - name: 'Install python packages'
+      pip: name={{ item }} executable=~/.anyenv/envs/pyenv/shims/pip2.7 extra_args="--user" state=latest
+      with_items:
+        - powerline-status
+        - psutil
+    - name: 'Install node packages'
+      npm: name={{ item }} executable=~/.anyenv/envs/ndenv/shims/npm global=yes state=latest
+      with_items:
+        - js-beautify
+        - git-fire
 
   tasks:
     - name: 'Install essential packages'
@@ -38,15 +43,15 @@
       command: homesick pull dotfiles
     - name: 'Make symlinks to under home dir'
       command: homesick symlink dotfiles --force
-    - name: mkdir vim backup dir
-      file: path=~/.vim/backup state=directory
-    - name: mkdir vim-neobundle dir
-      file: path=~/.vim/bundle state=directory
+    - name: 'mkdir vim related directories'
+      file: path={{ item }} state=directory
       notify: install neobundle
-    - name: mkdir vim undo dir
-      file: path=~/.vim/undo state=directory
+      with_items:
+        - ~/.vim/backup
+        - ~/.vim/bundle
+        - ~/.vim/undo
 
   handlers:
-    - name: install neobundle
+    - name: 'install neobundle'
       command: git clone git://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
 
