@@ -47,7 +47,7 @@
         - android-studio
         - android-sdk
         - android-ndk
-        - docker-toolbox
+        - docker
         - firefox
         - font-m-plus
         - font-terminus
@@ -62,7 +62,6 @@
     - name: 'Install Homebrew packages'
       homebrew: name={{ item }} state=latest
       with_items:
-        - homebrew/dupes/ncurses
         - gcc
         - ant
         - apktool
