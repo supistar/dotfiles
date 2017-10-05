@@ -42,30 +42,31 @@
       homebrew_cask: name={{ item }}
       with_items:
         - xquartz
+        - java8
         - alfred
         - android-studio
+        - android-sdk
+        - android-ndk
+        - docker-toolbox
         - firefox
         - font-m-plus
         - font-terminus
         - google-chrome
         - iterm2
-        - java
         - java6
-        - java7
         - karabiner
-        - macvim-kaoriya
+        - macvim
         - sublime-text
         - vagrant
         - virtualbox
     - name: 'Install Homebrew packages'
       homebrew: name={{ item }} state=latest
       with_items:
+        - homebrew/dupes/ncurses
         - gcc
-        - android-sdk
-        - android-ndk
         - ant
         - apktool
-        - homebrew/versions/appledoc22
+        - appledoc
         - autoconf
         - automake
         - chromedriver
@@ -104,7 +105,7 @@
         - sqlite
         - swig
         - tig
-        - tmux2
+        - tmux
         - tree
         - watch
         - wget
@@ -125,13 +126,16 @@
     - name: 'Copy Ricty fonts'
       shell: cp -f /usr/local/opt/ricty/share/fonts/Ricty*.ttf ~/Library/Fonts/
     - name: 'Clone powerline fonts'
-      command: git clone git@github.com:powerline/fonts.git /tmp/fonts
+      unarchive:
+        src: https://github.com/powerline/fonts/archive/master.zip
+        dest: /tmp
+        remote_src: yes
     - name: 'Install powerline fonts'
-      command: sh /tmp/fonts/install.sh
+      command: sh /tmp/fonts-master/install.sh
     - name: 'Refresh fonts cache'
       command: fc-cache -vf
     - name: 'Delete temporary directory for powerline fonts'
-      file: path=/tmp/fonts state=absent
+      file: path=/tmp/fonts-master state=absent
     - name: 'mkdir Karabiner dir'
       file: path="~/Library/Application Support/Karabiner" state=directory
     - name: 'Karabiner: Make symlink of setting files'
