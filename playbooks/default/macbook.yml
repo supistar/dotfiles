@@ -43,16 +43,20 @@
       homebrew_cask: name={{ item }}
       with_items:
         - xquartz
+        - java8
         - 1password
         - adobe-air
         - adobe-creative-cloud
         - alfred
+        - android-sdk
+        - android-ndk
         - android-studio
         - appcode
         - arduino
         - burn
         - chromium
         - cooviewer
+        - docker
         - dropbox
         - duet
         - firefox
@@ -62,15 +66,13 @@
         - hhkb-professional-driver
         - intellij-idea
         - iterm2
-        - java
         - java6
-        - java7
         - karabiner
         - kensington-trackball-works
         - kindle
         - lastfm
         - limechat
-        - macvim-kaoriya
+        - macvim
         - mono-mdk
         - mono-mdk3121
         - pycharm
@@ -91,11 +93,9 @@
       homebrew: name={{ item }} state=latest
       with_items:
         - gcc
-        - android-sdk
-        - android-ndk
         - ant
         - apktool
-        - homebrew/versions/appledoc22
+        - appledoc
         - autoconf
         - automake
         - blueutil
@@ -170,9 +170,12 @@
     - name: 'Copy Ricty fonts'
       shell: cp -f /usr/local/opt/ricty/share/fonts/Ricty*.ttf ~/Library/Fonts/
     - name: 'Clone powerline fonts'
-      command: git clone git@github.com:powerline/fonts.git /tmp/fonts
+      unarchive:
+        src: https://github.com/powerline/fonts/archive/master.zip
+        dest: /tmp
+        remote_src: yes
     - name: 'Install powerline fonts'
-      command: sh /tmp/fonts/install.sh
+      command: sh /tmp/fonts-master/install.sh
     - name: 'Refresh fonts cache'
       command: fc-cache -vf
     - name: 'Delete temporary directory for powerline fonts'
