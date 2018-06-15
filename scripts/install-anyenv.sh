@@ -1,8 +1,8 @@
 #!/bin/sh
 
-RB_VER=2.2.2
-ND_VER=v0.10.36
-PY_VER=2.7.10
+RB_VER=2.5.1
+ND_VER=v8.11.3
+PY_VER=3.6.5
 
 ANYENV_ROOT=${HOME}/.anyenv
 PYENV_PLUGINS_ROOT=${ANYENV_ROOT}/envs/pyenv/plugins
