@@ -14,9 +14,9 @@
         - gisty
         - sigh
     - name: 'Update pip'
-      pip: name=pip executable=~/.anyenv/envs/pyenv/shims/pip2.7 state=latest
+      pip: name=pip executable=~/.anyenv/envs/pyenv/shims/pip state=latest
     - name: 'Install python packages'
-      pip: name={{ item }} executable=~/.anyenv/envs/pyenv/shims/pip2.7 extra_args="--user" state=latest
+      pip: name={{ item }} executable=~/.anyenv/envs/pyenv/shims/pip extra_args="--user" state=latest
       with_items:
         - powerline-status
         - psutil
