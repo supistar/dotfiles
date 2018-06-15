@@ -171,6 +171,8 @@
         - zeromq
         - zsh
         - zsh-completions
+    - name: 'Add Java environments to jenv'
+      shell: find /Library/Java/JavaVirtualMachines -d -name "Home" -print0 | xargs -0 -I% ~/.anyenv/envs/jenv/bin/jenv add % || true
     - name: 'Install Homebrew packages: ffmpeg'
       homebrew: name=ffmpeg state=latest install_options=with-faac
     - name: 'Install Homebrew packages: ricty'

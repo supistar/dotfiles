@@ -43,3 +43,9 @@ if [ ${IS_INSTALLED_PY} -eq 0 ]; then
     git clone https://github.com/yyuu/pyenv-update.git ${PYENV_PLUGINS_ROOT}/pyenv-update
 fi
 
+IS_INSTALLED_J=$(anyenv version | grep jenv | wc -l | xargs echo)
+if [ ${IS_INSTALLED_J} -eq 0 ]; then
+    anyenv install -f jenv
+    ${SHELL} -lc "jenv rehash"
+fi
+
