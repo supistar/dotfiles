@@ -2,7 +2,7 @@
 - hosts: localhost
   connection: local
   gather_facts: no
-  sudo: no
+  become: false
 
   pre_tasks:
     - name: 'Install gem packages'
@@ -14,9 +14,9 @@
         - gisty
         - sigh
     - name: 'Update pip'
-      pip: name=pip executable=~/.anyenv/envs/pyenv/shims/pip2.7 state=latest
+      pip: name=pip executable=~/.anyenv/envs/pyenv/shims/pip state=latest
     - name: 'Install python packages'
-      pip: name={{ item }} executable=~/.anyenv/envs/pyenv/shims/pip2.7 extra_args="--user" state=latest
+      pip: name={{ item }} executable=~/.anyenv/envs/pyenv/shims/pip extra_args="--user" state=latest
       with_items:
         - powerline-status
         - psutil
@@ -28,9 +28,9 @@
     - name: 'Tap homebrew repositories'
       homebrew_tap: tap={{ item }} state=present
       with_items: 
-        - caskroom/cask
-        - caskroom/versions
-        - caskroom/homebrew-fonts
+        - homebrew/cask
+        - homebrew/cask-versions
+        - homebrew/cask-fonts
         - homebrew/versions
         - sanemat/font
         - supistar/customs
@@ -44,7 +44,7 @@
       with_items:
         - xquartz
         - java8
-        - 1password
+        - 1password6
         - adobe-air
         - adobe-creative-cloud
         - alfred
@@ -52,10 +52,12 @@
         - android-ndk
         - android-studio
         - appcode
-        - arduino
         - burn
+        - caffeine
+        - chromedriver
         - chromium
         - cooviewer
+        - daisydisk
         - docker
         - dropbox
         - duet
@@ -65,25 +67,30 @@
         - google-chrome
         - hhkb-professional-driver
         - intellij-idea
+        - ios-console
         - iterm2
-        - java6
-        - karabiner
+        - jetbrains-toolbox
+        - karabiner-elements
         - kensington-trackball-works
         - kindle
-        - lastfm
         - limechat
         - macvim
+        - makemkv
         - mono-mdk
-        - mono-mdk3121
         - pycharm
+        - quik
+        - sdformatter
         - skitch
         - skype
         - slack
+        - spotify
+        - sqlitebrowser
+        - steam
         - sublime-text
-        - unity463p2
         - vagrant
         - virtualbox
         - visual-studio-code
+        - vivaldi
         - vlc
         - vmware-fusion
         - webstorm
@@ -94,12 +101,15 @@
       with_items:
         - gcc
         - ant
+        - ansible
         - apktool
         - appledoc
         - autoconf
         - automake
+        - awscli
         - blueutil
-        - chromedriver
+        - boost
+        - carthage
         - cmake
         - ctags
         - curl
@@ -112,7 +122,7 @@
         - gnupg
         - go
         - gradle
-        - heroku-toolbelt
+        - heroku
         - highlight
         - highway
         - httpie
@@ -121,6 +131,7 @@
         - imagemagick
         - ino
         - ios-sim
+        - iproute2mac
         - jq
         - jsdoc3
         - lame
@@ -131,8 +142,10 @@
         - libusb-compat
         - libxml2
         - libyaml
+        - mas
         - maven
         - nkf
+        - peco
         - phantomjs
         - pkg-config
         - psutils
@@ -155,8 +168,11 @@
         - yasm
         - yuicompressor
         - z
+        - zeromq
         - zsh
         - zsh-completions
+    - name: 'Add Java environments to jenv'
+      shell: find /Library/Java/JavaVirtualMachines -d -name "Home" -print0 | xargs -0 -I% ~/.anyenv/envs/jenv/bin/jenv add % || true
     - name: 'Install Homebrew packages: ffmpeg'
       homebrew: name=ffmpeg state=latest install_options=with-faac
     - name: 'Install Homebrew packages: ricty'
@@ -180,12 +196,12 @@
       command: fc-cache -vf
     - name: 'Delete temporary directory for powerline fonts'
       file: path=/tmp/fonts state=absent
-    - name: 'mkdir Karabiner dir'
-      file: path="~/Library/Application Support/Karabiner" state=directory
+    - name: 'mkdir Karabiner-Elements base dir'
+      file: path="~/.config" state=directory
     - name: 'Karabiner: Make symlink of setting files'
-      file: src={{ item }} dest="~/Library/Application Support/Karabiner/{{ item | basename }}" state=link force=yes
+      file: src={{ item }} dest="~/.config/{{ item | basename }}" state=link force=yes
       with_fileglob:
-        - ~/.homesick/repos/dotfiles/applications/Karabiner/*
+        - ~/.homesick/repos/dotfiles/applications/Karabiner-Elements/*
     - name: 'mkdir vim related directories'
       file: path={{ item }} state=directory
       notify: install neobundle
