@@ -196,12 +196,12 @@
       command: fc-cache -vf
     - name: 'Delete temporary directory for powerline fonts'
       file: path=/tmp/fonts state=absent
-    - name: 'mkdir Karabiner dir'
-      file: path="~/Library/Application Support/Karabiner" state=directory
+    - name: 'mkdir Karabiner-Elements base dir'
+      file: path="~/.config" state=directory
     - name: 'Karabiner: Make symlink of setting files'
-      file: src={{ item }} dest="~/Library/Application Support/Karabiner/{{ item | basename }}" state=link force=yes
+      file: src={{ item }} dest="~/.config/{{ item | basename }}" state=link force=yes
       with_fileglob:
-        - ~/.homesick/repos/dotfiles/applications/Karabiner/*
+        - ~/.homesick/repos/dotfiles/applications/Karabiner-Elements/*
     - name: 'mkdir vim related directories'
       file: path={{ item }} state=directory
       notify: install neobundle
