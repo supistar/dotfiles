@@ -31,7 +31,6 @@
         - homebrew/cask
         - homebrew/cask-versions
         - homebrew/cask-fonts
-        - homebrew/versions
         - sanemat/font
         - supistar/customs
         - tkengo/highway
