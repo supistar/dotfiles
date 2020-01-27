@@ -35,7 +35,7 @@ alias la='ls -AG'
 alias l='ls -CFG'
 
 # For vless
-alias vless='/usr/share/vim/vim73/macros/less.sh'
+alias vless=$(find /usr/share/vim/**/macros -name "less.sh" | head -n 1)
 
 # less customize
 export LESS='-R -X -i -P ?f%f:(stdin).  ?lb%lb?L/%L..  [?eEOF:?pb%pb\%..]'

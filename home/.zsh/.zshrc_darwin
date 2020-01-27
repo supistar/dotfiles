@@ -29,9 +29,6 @@ function precmd () {
        z --add "$(pwd -P)"
 }
 
-# For Japanese
-export LC_CTYPE="ja_JP.UTF-8"
-
 # For Android Development
 export ANDROID_HOME=/usr/local/opt/android-sdk
 
@@ -56,7 +53,6 @@ export ANT_ROOT=/usr/local/bin
 export PATH=$ANT_ROOT:$PATH
 
 # For Java development
-export JAVA_HOME=$(/usr/libexec/java_home -v 1.7)
 export MAVEN_OPTS='-Xmx1024m -XX:MaxPermSize=256m'
 
 # zsh completion
@@ -79,3 +75,8 @@ alias brew-cask-clean-outdated='for c in /opt/homebrew-cask/Caskroom/*; do vl=(`
 
 # For GO
 export GOPATH=$HOME/Go
+
+# Locale
+export LC_ALL="ja_JP.UTF-8"
+#export LC_CTYPE="ja_JP.UTF-8"
+
