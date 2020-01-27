@@ -24,6 +24,7 @@ NeoBundle 'davidhalter/jedi-vim'
 NeoBundle 'hynek/vim-python-pep8-indent'
 NeoBundle 'Townk/vim-autoclose'
 NeoBundle 'scrooloose/syntastic'
+NeoBundle 'leafgarland/typescript-vim'
 
 call neobundle#end()
 filetype plugin indent on
