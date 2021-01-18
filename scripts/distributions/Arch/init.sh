@@ -1,10 +1,7 @@
 #!/bin/sh
 
-# Update yum
-sudo yum update
-
 # Install basic packages
-sudo pacman -S git base-devel python2
+sudo pacman -Syy --noconfirm git base-devel python python-pip
 
 # Set anyenv path
 sh ./scripts/set-anyenv-path.sh bash_profile
@@ -19,9 +16,6 @@ sh ./scripts/distributions/Arch/install-gitflow.sh
 pip install --upgrade pip
 # Install ansible
 pip install ansible
-
-# Create simlink for python (avoid gem error)
-sudo ln -sf /usr/bin/python2 /usr/bin/python
 
 # Execute ansible
 TARGET=${1:-default}

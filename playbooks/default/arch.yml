@@ -2,7 +2,6 @@
 - hosts: localhost
   connection: local
   gather_facts: no
-  sudo: no
   vars:
     locale: ja_JP.UTF-8
     zone: Asia/Tokyo
@@ -17,14 +16,14 @@
         - cocoapods
         - gisty
     - name: 'Update pip'
-      pip: name=pip executable=~/.anyenv/envs/pyenv/shims/pip2.7 state=latest
+      pip: name=pip executable=~/.anyenv/envs/pyenv/shims/pip state=latest
     - name: 'Install python packages'
-      pip: name={{ item }} executable=~/.anyenv/envs/pyenv/shims/pip2.7 extra_args="--user" state=latest
+      pip: name={{ item }} executable=~/.anyenv/envs/pyenv/shims/pip extra_args="--user" state=latest
       with_items:
         - powerline-status
         - psutil
     - name: 'Install node packages'
-      npm: name={{ item }} executable=~/.anyenv/envs/ndenv/shims/npm global=yes state=latest
+      npm: name={{ item }} executable=~/.anyenv/envs/nodenv/shims/npm global=yes state=latest
       with_items:
         - js-beautify
         - git-fire
@@ -32,7 +31,7 @@
   tasks:
     - name: 'Install essential packages'
       pacman: name={{ item }} state=latest update_cache=yes
-      sudo: yes
+      become: yes
       with_items:
         - tmux
         - bluez
