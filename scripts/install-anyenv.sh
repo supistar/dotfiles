@@ -1,8 +1,8 @@
 #!/bin/sh
 
 RB_VER=2.5.1
-ND_VER=v8.11.3
-PY_VER=3.6.5
+ND_VER=9.2.1
+PY_VER=3.8.2
 
 ANYENV_ROOT=${HOME}/.anyenv
 PYENV_PLUGINS_ROOT=${ANYENV_ROOT}/envs/pyenv/plugins
@@ -16,7 +16,8 @@ git clone https://github.com/riywo/anyenv ${ANYENV_ROOT}
 export PATH="$HOME/.anyenv/bin:$PATH"
 
 # Install
-eval "$(anyenv init -)"
+~/.anyenv/bin/anyenv init
+~/.anyenv/bin/anyenv install --init
 
 IS_INSTALLED_RB=$(rbenv version | grep ${RB_VER} | wc -l | xargs echo)
 if [ ${IS_INSTALLED_RB} -eq 0 ]; then
@@ -24,10 +25,10 @@ if [ ${IS_INSTALLED_RB} -eq 0 ]; then
     ${SHELL} -lc "rbenv install -f ${RB_VER} && rbenv global ${RB_VER} && rbenv rehash"
 fi
 
-IS_INSTALLED_ND=$(ndenv version | grep ${ND_VER} | wc -l | xargs echo)
+IS_INSTALLED_ND=$(nodenv version | grep ${ND_VER} | wc -l | xargs echo)
 if [ ${IS_INSTALLED_ND} -eq 0 ]; then
-    anyenv install -f ndenv
-    ${SHELL} -lc "ndenv install -f ${ND_VER} && ndenv global ${ND_VER} && ndenv rehash"
+    anyenv install -f nodenv
+    ${SHELL} -lc "nodenv install -f ${ND_VER} && nodenv global ${ND_VER} && nodenv rehash"
 fi
 
 IS_INSTALLED_PY=$(pyenv version | grep ${PY_VER} | wc -l | xargs echo)
