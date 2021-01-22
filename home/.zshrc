@@ -35,11 +35,11 @@ alias la='ls -AG'
 alias l='ls -CFG'
 
 # For vless
-alias vless=$(find /usr/share/vim/**/macros -name "less.sh" | head -n 1)
+alias vless=$(find /usr/share/vim/**/macros -name "less.sh" | tail -n 1)
 
 # less customize
 export LESS='-R -X -i -P ?f%f:(stdin).  ?lb%lb?L/%L..  [?eEOF:?pb%pb\%..]'
-export LESSOPEN='| /usr/local/bin/src-hilite-lesspipe.sh %s'
+export LESSOPEN='| $(which src-hilite-lesspipe.sh) %s'
 export PAGER=less
 
 # ls colors
@@ -119,7 +119,7 @@ export PATH=$HOME/.tmux/scripts:$PATH
 
 # For powerline
 export PATH=$HOME/.local/bin:$PATH
-source $HOME/.local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh
+source $(find ${HOME}/.local/lib/python3*/site-packages/powerline/bindings/zsh/ -name "powerline.zsh" | tail -n 1)
 
 # Add anyenv to PATH for scripting
 export PATH="$HOME/.anyenv/bin:$PATH"
@@ -144,3 +144,12 @@ zstyle ':zle:*' word-style unspecified
 if which pyenv > /dev/null 2>&1; then
     eval "$(pyenv virtualenv-init -)"
 fi
+
+GOOGLE_CLOUD_SDK_PATH="${HOME}/Git/google-cloud-sdk"
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f "${GOOGLE_CLOUD_SDK_PATH}/google-cloud-sdk/path.zsh.inc" ]; then . "${GOOGLE_CLOUD_SDK_PATH}/google-cloud-sdk/path.zsh.inc"; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f "${GOOGLE_CLOUD_SDK_PATH}/google-cloud-sdk/completion.zsh.inc" ]; then . "${GOOGLE_CLOUD_SDK_PATH}/google-cloud-sdk/completion.zsh.inc"; fi
+
