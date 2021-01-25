@@ -10,3 +10,5 @@ home/.vim/.netrwhist
 # Retry file
 *.retry
 
+# Homesick
+automatic_backups/
