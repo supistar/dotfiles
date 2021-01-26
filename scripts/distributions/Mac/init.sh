@@ -4,7 +4,8 @@
 sudo xcodebuild -license
 
 # Install homebrew
-ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+yes | /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+echo 'eval $(/opt/homebrew/bin/brew shellenv)' >> ~/.zprofile
 brew doctor
 
 # Update homebrew
@@ -18,6 +19,8 @@ ansible-galaxy install hnakamur.homebrew-cask-packages
 
 # Set anyenv path
 sh ./scripts/set-anyenv-path.sh bash_profile
+# Install required packages for anyenv
+brew install zlib bzip2 openssl
 # Reload profile
 source ~/.bash_profile
 # Install anyenv

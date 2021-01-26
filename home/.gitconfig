@@ -1,7 +1,5 @@
 [include]
     path = .gitconfig.local
-[credential]
-    helper = cache --timeout=3600
 [core]
     editor = vim -c \"set fenc=utf-8\"
     pager = less -R
@@ -22,3 +20,5 @@
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
+[pull]
+	rebase = false

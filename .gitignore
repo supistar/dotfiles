@@ -10,3 +10,8 @@ home/.vim/.netrwhist
 # Retry file
 *.retry
 
+# Homesick
+automatic_backups/
+
+# Local
+home/.gitconfig.local
