@@ -1,5 +1,5 @@
 ### Aliases
-alias rm='rmtrash'
+alias rm='trash'
 alias rrm='/bin/rm'
 
 # For mosh
