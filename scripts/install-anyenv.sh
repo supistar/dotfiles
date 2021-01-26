@@ -2,7 +2,7 @@
 
 RB_VER=2.7.2
 ND_VER=14.15.4
-PY_VER=3.8.7
+PY_VER=3.9.1
 
 ANYENV_ROOT=${HOME}/.anyenv
 PYENV_PLUGINS_ROOT=${ANYENV_ROOT}/envs/pyenv/plugins
@@ -17,31 +17,32 @@ export PATH="$HOME/.anyenv/bin:$PATH"
 
 # Install
 ~/.anyenv/bin/anyenv init
-~/.anyenv/bin/anyenv install --init
+~/.anyenv/bin/anyenv install --init --force
 
 IS_INSTALLED_RB=$(rbenv version | grep ${RB_VER} | wc -l | xargs echo)
-if [ ${IS_INSTALLED_RB} -eq 0 ]; then
+if [ ${IS_INSTALLED_RB} -le 1 ]; then
     anyenv install -f rbenv
     ${SHELL} -lc "rbenv install -f ${RB_VER} && rbenv global ${RB_VER} && rbenv rehash"
 fi
 
 IS_INSTALLED_ND=$(nodenv version | grep ${ND_VER} | wc -l | xargs echo)
-if [ ${IS_INSTALLED_ND} -eq 0 ]; then
+if [ ${IS_INSTALLED_ND} -le 1 ]; then
     anyenv install -f nodenv
     ${SHELL} -lc "nodenv install -f ${ND_VER} && nodenv global ${ND_VER} && nodenv rehash"
 fi
 
 IS_INSTALLED_PY=$(pyenv version | grep ${PY_VER} | wc -l | xargs echo)
-if [ ${IS_INSTALLED_PY} -eq 0 ]; then
+if [ ${IS_INSTALLED_PY} -le 1 ]; then
     anyenv install -f pyenv
     if test "${SYS_NAME}" == "Darwin"; then
-        PYENV_FLAGS=$(echo CFLAGS="-I$(brew --prefix openssl)/include" LDFLAGS="-L$(brew --prefix openssl)/lib")
+        PYENV_FLAGS=$(echo CFLAGS=\"-I$(brew --prefix openssl)/include\" LDFLAGS=\"-L$(brew --prefix openssl)/lib -L$(brew --prefix zlib)/lib -L$(brew --prefix bzip2)/lib\")
+	echo "Additional pyenv flags: ${PYENV_FLAGS}"
     fi
     ${SHELL} -lc "${PYENV_FLAGS} pyenv install -f ${PY_VER} && pyenv global ${PY_VER} && pyenv rehash"
 
     # Install plugins
-    git clone https://github.com/yyuu/pyenv-virtualenv.git ${PYENV_PLUGINS_ROOT}/pyenv-virtualenv
-    git clone https://github.com/yyuu/pyenv-update.git ${PYENV_PLUGINS_ROOT}/pyenv-update
+    git clone https://github.com/pyenv/pyenv-virtualenv.git ${PYENV_PLUGINS_ROOT}/pyenv-virtualenv
+    git clone https://github.com/pyenv/pyenv-update.git ${PYENV_PLUGINS_ROOT}/pyenv-update
 fi
 
 IS_INSTALLED_J=$(anyenv version | grep jenv | wc -l | xargs echo)
