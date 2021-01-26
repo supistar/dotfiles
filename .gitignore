@@ -12,3 +12,6 @@ home/.vim/.netrwhist
 
 # Homesick
 automatic_backups/
+
+# Local
+home/.gitconfig.local
