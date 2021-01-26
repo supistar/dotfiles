@@ -5,6 +5,9 @@
   become: false
 
   pre_tasks:
+    - name: 'Check current architecture'
+      shell: uname -m
+      register: architecture
     - name: 'Install gem packages'
       gem: name={{ item }} executable=~/.anyenv/envs/rbenv/shims/gem user_install=False
       with_items:
@@ -21,7 +24,7 @@
         - powerline-status
         - psutil
     - name: 'Install node packages'
-      npm: name={{ item }} executable=~/.anyenv/envs/ndenv/shims/npm global=yes state=latest
+      npm: name={{ item }} executable=~/.anyenv/envs/nodenv/shims/npm global=yes state=latest
       with_items:
         - js-beautify
         - git-fire
@@ -31,9 +34,8 @@
         - homebrew/cask
         - homebrew/cask-versions
         - homebrew/cask-fonts
-        - sanemat/font
+        - homebrew-ffmpeg/ffmpeg
         - supistar/customs
-        - tkengo/highway
     - name: 'Update Homebrew'
       command: brew update
 
@@ -42,40 +44,38 @@
       homebrew_cask: name={{ item }}
       with_items:
         - xquartz
-        - java8
-        - 1password6
-        - adobe-air
+        - 1password
         - adobe-creative-cloud
         - alfred
         - android-sdk
+        - android-platform-tools
         - android-ndk
         - android-studio
         - appcode
+        - atok
+        - autodesk-fusion360
         - burn
-        - caffeine
         - chromedriver
         - chromium
-        - cooviewer
         - daisydisk
         - docker
         - dropbox
-        - duet
         - firefox
-        - font-m-plus
+        - font-mplus
         - font-terminus
+        - goland
         - google-chrome
+        - hex-fiend
         - hhkb-professional-driver
         - intellij-idea
         - ios-console
         - iterm2
         - jetbrains-toolbox
         - karabiner-elements
-        - kensington-trackball-works
+        - homebrew/cask-drivers/kensington-trackball-works
         - kindle
-        - limechat
-        - macvim
         - makemkv
-        - mono-mdk
+        - osxfuse
         - pycharm
         - quik
         - sdformatter
@@ -83,9 +83,9 @@
         - skype
         - slack
         - spotify
-        - sqlitebrowser
         - steam
         - sublime-text
+        - unity-hub
         - vagrant
         - virtualbox
         - visual-studio-code
@@ -93,97 +93,108 @@
         - vlc
         - vmware-fusion
         - webstorm
-        - xamarin-studio
         - xmind
+        - zoomus
+    - name: 'Install Homebrew packages (x86_64)'
+      when: architecture.stdout == "x86_64"
+      homebrew:
+        state: latest
+        name:
+          - apktool
+          - appledoc
+          - arduino-cli
+          - circleci
+          - mas
+          - packer
+          - sshfs
+          - terraform
+          - terraformer
+          - wine
+          - winetricks
+          - xctool
     - name: 'Install Homebrew packages'
-      homebrew: name={{ item }} state=latest
-      with_items:
-        - gcc
-        - ant
-        - ansible
-        - apktool
-        - appledoc
-        - autoconf
-        - automake
-        - awscli
-        - blueutil
-        - boost
-        - carthage
-        - cmake
-        - ctags
-        - curl
-        - doxygen
-        - expat
-        - faac
-        - fswatch
-        - git
-        - git-flow
-        - gnupg
-        - go
-        - gradle
-        - heroku
-        - highlight
-        - highway
-        - httpie
-        - hub
-        - icu4c
-        - imagemagick
-        - ino
-        - ios-sim
-        - iproute2mac
-        - jq
-        - jsdoc3
-        - lame
-        - libevent
-        - libpng
-        - libtool
-        - libusb
-        - libusb-compat
-        - libxml2
-        - libyaml
-        - mas
-        - maven
-        - nkf
-        - peco
-        - phantomjs
-        - pkg-config
-        - psutils
-        - reattach-to-user-namespace
-        - redis
-        - rmtrash
-        - source-highlight
-        - sqlite
-        - swig
-        - tig
-        - tmux
-        - tree
-        - watch
-        - wget
-        - wine
-        - winetricks
-        - x264
-        - xctool
-        - xvid
-        - yasm
-        - yuicompressor
-        - z
-        - zeromq
-        - zsh
-        - zsh-completions
+      homebrew:
+        state: latest
+        name:
+          - gcc
+          - adns
+          - ag
+          - ant
+          - ansible
+          - autoconf
+          - automake
+          - awscli
+          - blueutil
+          - boost
+          - carthage
+          - cmake
+          - coreutils
+          - ctags
+          - curl
+          - doxygen
+          - expat
+          - faac
+          - fswatch
+          - git
+          - git-flow
+          - git-lfs
+          - glib
+          - gnu-sed
+          - gnupg
+          - go
+          - gradle
+          - highlight
+          - httpie
+          - hub
+          - icu4c
+          - imagemagick
+          - ios-sim
+          - iproute2mac
+          - jq
+          - jsdoc3
+          - lame
+          - libevent
+          - libpng
+          - libtool
+          - libusb
+          - libusb-compat
+          - libxml2
+          - libyaml
+          - maven
+          - macos-trash
+          - nkf
+          - peco
+          - pkg-config
+          - psutils
+          - reattach-to-user-namespace
+          - redis
+          - rename
+          - source-highlight
+          - sqlite
+          - swig
+          - tig
+          - tmux
+          - tree
+          - watch
+          - wget
+          - x264
+          - xvid
+          - yasm
+          - yuicompressor
+          - z
+          - zeromq
+          - zsh
+          - zsh-completions
     - name: 'Add Java environments to jenv'
       shell: find /Library/Java/JavaVirtualMachines -d -name "Home" -print0 | xargs -0 -I% ~/.anyenv/envs/jenv/bin/jenv add % || true
-    - name: 'Install Homebrew packages: ffmpeg'
-      homebrew: name=ffmpeg state=latest install_options=with-faac
-    - name: 'Install Homebrew packages: ricty'
-      homebrew: name=ricty state=latest install_options=powerline,vim-powerline
+    - name: 'Install Homebrew packages: homebrew-ffmpeg/ffmpeg/ffmpeg'
+      homebrew: name=homebrew-ffmpeg/ffmpeg/ffmpeg state=latest install_options=with-fdk-aac
     - name: 'Clone dotfiles under home dir'
       command: homesick clone supistar/dotfiles
     - name: 'Pull homesick dotfiles'
       command: homesick pull dotfiles
     - name: 'Make symlinks to under home dir'
       command: homesick symlink dotfiles --force
-    - name: 'Copy Ricty fonts'
-      shell: cp -f /usr/local/opt/ricty/share/fonts/Ricty*.ttf ~/Library/Fonts/
     - name: 'Clone powerline fonts'
       unarchive:
         src: https://github.com/powerline/fonts/archive/master.zip
