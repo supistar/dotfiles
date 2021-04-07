@@ -1,17 +1,21 @@
-#!/bin/sh
+#!/bin/bash
 
 ANYENV_INSTALL=$(printenv | grep anyenv | wc -l | xargs echo)
 
-if test ${ANYENV_INSTALL} -gt 0; then
+if [ ${ANYENV_INSTALL} -gt 0 ]; then
   echo "Anyenv is already installed, quitting... :)"
   exit 1
 fi
 
-if test "$1" != "bash_profile" -a "$1" != "zshrc"; then
+if [ "$1" != "bash_profile" -a "$1" != "zshrc" ]; then
   echo "Argument looks wrong, please specify bash_profile or zshrc"
   exit 2
 fi
 
+if [ $(grep -e 'export PATH="$HOME/.anyenv/bin:$PATH"' ~/.$1) != "" ]; then
+  echo "Anyenv export is already added in ~/.$1."
+  exit 0
+fi
 
 # Set exports
 echo '' >> ~/.$1

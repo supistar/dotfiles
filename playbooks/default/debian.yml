@@ -1,0 +1,96 @@
+---
+- hosts: localhost
+  connection: local
+  gather_facts: no
+  vars:
+    locale: ja_JP.UTF-8
+    zone: Asia/Tokyo
+    zoneinfo_path: /usr/share/zoneinfo/Asia/Tokyo
+
+  pre_tasks:
+    - name: 'Install gem packages'
+      gem: name={{ item }} executable=~/.anyenv/envs/rbenv/shims/gem user_install=False
+      with_items:
+        - bundler
+        - homesick
+        - cocoapods
+        - gisty
+    - name: 'Update pip'
+      pip: name=pip executable=~/.anyenv/envs/pyenv/shims/pip state=latest
+    - name: 'Install python packages'
+      pip: 
+        executable: ~/.anyenv/envs/pyenv/shims/pip
+        extra_args: "--user"
+        state: latest
+        name:
+          - powerline-status
+          - psutil
+    - name: 'Install node packages'
+      npm: name={{ item }} executable=~/.anyenv/envs/nodenv/shims/npm global=yes state=latest
+      with_items:
+        - js-beautify
+        - git-fire
+
+  tasks:
+    - name: 'Install google cloud SDK required packages'
+      become: yes
+      apt:
+        state: latest
+        update_cache: yes
+        name:
+          - apt-transport-https
+          - ca-certificates
+          - gnupg
+    - name: 'Add google cloud SDK signing key'
+      become: yes
+      ansible.builtin.apt_key:
+        url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+        keyring: /usr/share/keyrings/cloud.google.gpg
+        state: present
+    - name: 'Add google cloud SDK repository'
+      become: yes
+      ansible.builtin.apt_repository:
+        repo: deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main
+        state: present
+        filename: google-cloud-sdk
+    - name: 'Add scala sbt signing key'
+      become: yes
+      ansible.builtin.apt_key:
+        keyserver: keyserver.ubuntu.com
+        id: '0x2EE0EA64E40A89B84B2DF73499E82A75642AC823'
+        state: present
+    - name: 'Add scala sbt repository'
+      become: yes
+      ansible.builtin.apt_repository:
+        repo: deb https://dl.bintray.com/sbt/debian /
+        state: present
+        filename: sbt
+    - name: 'Install essential packages'
+      become: yes
+      apt:
+        state: latest
+        update_cache: yes
+        name:
+          - tmux
+          - zsh
+          - bluez
+          - bluez-tools
+          - google-cloud-sdk
+    - name: 'Clone dotfiles under home dir'
+      command: homesick clone supistar/dotfiles
+    - name: 'Pull homesick dotfiles'
+      command: homesick pull dotfiles
+    - name: 'Make symlinks to under home dir'
+      command: homesick symlink dotfiles --force
+    - name: 'mkdir vim related directories'
+      file: path={{ item }} state=directory
+      notify: install neobundle
+      with_items:
+        - ~/.vim/backup
+        - ~/.vim/bundle
+        - ~/.vim/undo
+
+  handlers:
+    - name: 'install neobundle'
+      command: git clone git://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
+
