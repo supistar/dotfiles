@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 RB_VER=2.7.2
 ND_VER=14.15.4
@@ -34,7 +34,7 @@ fi
 IS_INSTALLED_PY=$(pyenv version | grep ${PY_VER} | wc -l | xargs echo)
 if [ ${IS_INSTALLED_PY} -le 1 ]; then
     anyenv install -f pyenv
-    if test "${SYS_NAME}" == "Darwin"; then
+    if [ "${SYS_NAME}" == "Darwin" ]; then
         PYENV_FLAGS=$(echo CFLAGS=\"-I$(brew --prefix openssl)/include\" LDFLAGS=\"-L$(brew --prefix openssl)/lib -L$(brew --prefix zlib)/lib -L$(brew --prefix bzip2)/lib\")
 	echo "Additional pyenv flags: ${PYENV_FLAGS}"
     fi
@@ -45,7 +45,7 @@ if [ ${IS_INSTALLED_PY} -le 1 ]; then
     git clone https://github.com/pyenv/pyenv-update.git ${PYENV_PLUGINS_ROOT}/pyenv-update
 fi
 
-IS_INSTALLED_J=$(anyenv version | grep jenv | wc -l | xargs echo)
+IS_INSTALLED_J=$(jenv version | grep jenv | wc -l | xargs echo)
 if [ ${IS_INSTALLED_J} -eq 0 ]; then
     anyenv install -f jenv
     ${SHELL} -lc "jenv rehash"
