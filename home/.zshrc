@@ -7,6 +7,8 @@ UNAME=$(uname | tr '[A-Z]' '[a-z]')
 setopt correct
 # No beep
 setopt nolistbeep
+# No file glob
+setopt nonomatch
 
 # Key bind
 bindkey "^[[3~" delete-char
@@ -28,6 +30,9 @@ zle -N history-beginning-search-forward-end history-search-end
 bindkey "^P" history-beginning-search-backward-end
 bindkey "^N" history-beginning-search-forward-end
 
+# Completion
+autoload -U +X bashcompinit && bashcompinit
+
 ### Aliases
 alias ls='ls -G'
 alias ll='ls -lG'
@@ -38,6 +43,7 @@ alias l='ls -CFG'
 alias vless=$(find /usr/share/vim/**/macros -name "less.sh" | tail -n 1)
 
 # less customize
+export PATH=/usr/share/source-highlight:$PATH
 export LESS='-R -X -i -P ?f%f:(stdin).  ?lb%lb?L/%L..  [?eEOF:?pb%pb\%..]'
 export LESSOPEN='| $(which src-hilite-lesspipe.sh) %s'
 export PAGER=less
@@ -161,4 +167,28 @@ if [ -f "${GOOGLE_CLOUD_SDK_PATH}/google-cloud-sdk/path.zsh.inc" ]; then . "${GO
 
 # The next line enables shell command completion for gcloud.
 if [ -f "${GOOGLE_CLOUD_SDK_PATH}/google-cloud-sdk/completion.zsh.inc" ]; then . "${GOOGLE_CLOUD_SDK_PATH}/google-cloud-sdk/completion.zsh.inc"; fi
+
+export LD_LIBRARY_PATH=/usr/local/lib
+
+# Kubernetes
+alias kubectl=/usr/bin/kubectl
+export USE_GKE_GCLOUD_AUTH_PLUGIN=True
+
+# tfenv
+if [ -e $HOME/.tfenv/bin ]; then
+    export PATH="$HOME/.tfenv/bin:$PATH"
+    complete -o nospace -C $HOME/.tfenv/bin/terraform terraform
+fi
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+
+if [ -e "/opt/apache-maven/bin" ]; then export PATH="/opt/apache-maven/bin:${PATH}"; fi
+
+
+if [ -e $HOME/Git/vcpkg ]; then
+    export VCPKG_ROOT="$HOME/Git/vcpkg"
+    export PATH="$HOME/Git/vcpkg:$PATH"
+fi
 

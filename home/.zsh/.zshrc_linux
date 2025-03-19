@@ -3,3 +3,23 @@ export EDITOR=vim
 alias vi=vim
 bindkey -e
 
+# Workaround: WSL2+git slow functionality
+function git {
+  if [[ `pwd -P` =~ ^\/mnt\/[a-z]\/.*$ ]]; then
+    git.exe "$@"
+  else
+    /usr/bin/git "$@"
+  fi
+}
+
+# WinGet
+if [ -e "/mnt/c/Users/${USER}/AppData/Local/Microsoft/WinGet/Links" ]; then
+    export WINGET_LINKS="/mnt/c/Users/${USER}/AppData/Local/Microsoft/WinGet/Links"
+    export PATH="$WINGET_LINKS:$PATH"
+fi
+
+# 1Password
+if [ -e "$WINGET_LINKS/op.exe" ]; then
+    alias op=op.exe
+fi
+
