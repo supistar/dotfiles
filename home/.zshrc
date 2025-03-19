@@ -147,6 +147,15 @@ fi
 
 GOOGLE_CLOUD_SDK_PATH="${HOME}/Git/google-cloud-sdk"
 
+# Set python version x.y
+export PYTHON_VERSION=$(python -c 'import sys; print(str(sys.version_info[0])+"."+str(sys.version_info[1]))')
+
+# For gibo
+GIBO=/opt/homebrew/opt/gibo/share/zsh/site-functions/_gibo
+if [ -e "${GIBO}" ]; then
+    source ${GIBO}
+fi
+
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f "${GOOGLE_CLOUD_SDK_PATH}/google-cloud-sdk/path.zsh.inc" ]; then . "${GOOGLE_CLOUD_SDK_PATH}/google-cloud-sdk/path.zsh.inc"; fi
 
