@@ -4,6 +4,7 @@
     editor = vim -c \"set fenc=utf-8\"
     pager = less -R
     precomposeunicode = true
+    autocrlf = input
 [grep]
     lineNumber = true
 [alias]
@@ -20,3 +21,7 @@
 	required = true
 [pull]
 	rebase = false
+[pager]
+    log = diff-highlight | less
+    show = diff-highlight | less
+    diff = diff-highlight | less
